@@ -1,3 +1,9 @@
 # Introduction
 
-Something something, and then I state some citable facts [@Zelner2022].
+As cities across the United States work to support safer, more sustainable transportation, the need for well-designed infrastructure for cyclists and pedestrians has grown. Portland, Oregon, long considered a national leader in bike-friendliness, has invested heavily in neighborhood greenways, traffic calming features, and pedestrian infrastructure over the past two decades. These efforts aim to reduce vehicle speeds, discourage cut-through traffic, and make walking and biking more accessible and predictable.
+
+With roughly 6 percent of commutes made by bicycle and a Walk Score of 76, Portland has one of the most active transportation cultures in the country [@CyclingPortland6pct; @WalkScorePortland]. The city has also adopted a Vision Zero policy to eliminate traffic-related deaths and serious injuries [@PBOTVisionZero]. Yet despite these efforts, crashes involving pedestrians and cyclists remain a persistent concern, especially at intersections where non-motorized and motorized users interact.
+
+This project investigates whether neighborhood greenways, traffic calming features, and street lighting are associated with reduced crash frequency or severity for pedestrians and cyclists in Portland. Using data from 2007 to 2022, we analyze crash records alongside infrastructure inventories to explore potential relationships between street-level design and safety outcomes.
+
+Our goal is to contribute to Portland’s ongoing transportation planning efforts by providing evidence on whether these infrastructure investments are supporting safety goals for vulnerable road users.

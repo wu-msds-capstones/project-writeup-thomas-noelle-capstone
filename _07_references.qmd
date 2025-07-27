@@ -1,4 +1,80 @@
 # References
 
 :::{#refs}
+@misc{CyclingPortland6pct,
+  title = {Cycling in Portland, Oregon — bicycle commuting mode share},
+  author = {{Wikipedia contributors}},
+  year = {2025},
+  note = {6% bike-to-work mode share; among the highest in the U.S.},
+  url = {https://en.wikipedia.org/wiki/Cycling_in_Portland,_Oregon},
+  urldate = {2025-07-27}
+}
+
+@misc{WalkScorePortland,
+  title = {Portland, OR Walk Score},
+  author = {{Walk Score}},
+  year = {2025},
+  note = {Walk Score: 76; Bike Score: 83; Transit Score: 54},
+  url = {https://www.walkscore.com/OR/Portland},
+  urldate = {2025-07-27}
+}
+
+@misc{PBOTVisionZero,
+  author       = {{Portland Bureau of Transportation}},
+  title        = {Vision Zero Action Plan: 2023 Update},
+  year         = {2023},
+  url          = {https://www.portland.gov/sites/default/files/2023/vision-zero-action-plan-update-2023.pdf},
+  note         = {City of Portland}
+}
+
+@misc{PBOTGreenways,
+  author       = {{Portland Bureau of Transportation}},
+  title        = {Portland’s Neighborhood Greenways},
+  year         = {2023},
+  url          = {https://www.portland.gov/transportation/greenways},
+  note         = {City of Portland}
+}
+
+
+@misc{PBOTCrashStats,
+  author       = {{Portland Bureau of Transportation}},
+  title        = {Vision Zero: Crash Data and Trends},
+  year         = {2023},
+  url          = {https://www.portland.gov/transportation/vision-zero/crash-data},
+  note         = {City of Portland}
+}
+
+@article{Reynolds2009,
+  author       = {Conor C. Reynolds and M. Anne Harris and Kay Teschke and Peter A. Cripton and Meghan Winters},
+  title        = {The Impact of Transportation Infrastructure on Bicycling Injuries and Crashes: A Review of the Literature},
+  journal      = {Environmental Health},
+  year         = {2009},
+  volume       = {8},
+  number       = {47},
+  pages        = {1--19},
+  doi          = {10.1186/1476-069X-8-47}
+}
+
+@article{Lusk2011,
+  author       = {Anne C. Lusk and Peter G. Furth and Patrick Morency and Luis F. Miranda-Moreno and Walter C. Willett and Jack T. Dennerlein},
+  title        = {Risk of Injury for Bicycling on Cycle Tracks versus in the Street},
+  journal      = {Injury Prevention},
+  year         = {2011},
+  volume       = {17},
+  number       = {2},
+  pages        = {131--135},
+  doi          = {10.1136/ip.2010.028696}
+}
+
+@misc{ODOTInfrastructure,
+  author       = {{Oregon Department of Transportation}},
+  title        = {Bicycle and Pedestrian Infrastructure Evaluation Report},
+  year         = {2022},
+  url          = {https://www.oregon.gov/odot/Programs/Documents/BikePed-Infrastructure-Evaluation.pdf},
+  note         = {State of Oregon}
+}
+
+
+
+
 :::

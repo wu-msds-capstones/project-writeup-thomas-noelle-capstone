@@ -1,9 +1,9 @@
 ---
-title: "Capstone Project"
-subtitle: Subtitle
+title: "Portland Greenways and Intersection Safety"
+subtitle: "Exploring the Relationship Between Calming Infrastructure and Bike and Pedestrian Crash Risk"
 authors:
-  - Bob
-  - Jane
+  - Noelle Matthews
+  - Thomas Sato
 bibliography: references.bib
 title-block-banner: true
 format: 
