@@ -65,197 +65,41 @@ Validation procedures confirmed the uniqueness of `intersection_id` values withi
 
 ### Crash Trends and Severity
 
-As shown in Figure \@ref(fig:crash-trends), annual crash counts were relatively stable with a moderate decline during 2019–2021 (COVID19 pandemic), while bicycle- and pedestrian-involved crashes remained a small but persistent share of all crashes.
+As shown in Figure 2a, annual crash counts were relatively stable with a moderate decline during 2019–2021 (COVID-19 pandemic), while bicycle- and pedestrian-involved crashes remained a small but persistent share of all crashes.
 
-```{r crash-trends, fig.cap="Figure 2a: Annual crash counts comparing all crashes with those involving bicycles or pedestrians.", out.width="80%"}
-crash_counts <- crashes %>%
-  mutate(year = year(crash_dt),
-         crash_type = if_else(bike_flg | ped_flg, "Bike/Ped", "All Crashes"))
+![**Figure 2a:** Annual crash counts comparing all crashes with those involving bicycles or pedestrians.](figures/crash-trends.png)
 
-crash_counts %>%
-  group_by(year, crash_type) %>%
-  summarise(count = n(), .groups = "drop") %>%
-  ggplot(aes(x = year, y = count, color = crash_type)) +
-  geom_line(size = 1.2) +
-  labs(x = "Year", y = "Crash Count", color = "Crash Type") +
-  theme_minimal()
-```
-Similarly, Figure \@ref(fig:severity-dist) illustrates the distribution of injury severity levels for all crashes compared to those involving bicycles or pedestrians.
+Similarly, Figure 2b illustrates the distribution of injury severity levels for all crashes compared to those involving bicycles or pedestrians.
 
-```{r severity-dist, fig.cap="Figure 2b: Distribution of injury severity levels comparing all crashes with bicycle and pedestrian-involved crashes.", out.width="80%"}
-severity_dist <- crashes %>%
-  mutate(crash_type = if_else(bike_flg | ped_flg, "Bike/Ped", "All Crashes")) %>%
-  group_by(crash_type, highest_inj_svrty_desc) %>%
-  summarise(count = n(), .groups = "drop") %>%
-  group_by(crash_type) %>%
-  mutate(percent = count / sum(count) * 100)
+![**Figure 2b:** Distribution of injury severity levels comparing all crashes with bicycle and pedestrian-involved crashes.](figures/severity-dist.png)
 
-ggplot(severity_dist, aes(x = reorder(highest_inj_svrty_desc, -percent), y = percent, fill = crash_type)) +
-  geom_col(position = "dodge") +
-  labs(x = "Injury Severity", y = "Percent", fill = "Crash Type") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
+### Infrastructure Coverage and Grouping
 
-### Infrastructure Coverage and Grouping  
+Neighborhood greenways are distributed across Portland, spanning both east and west sides of the city. While coverage is denser in areas with a connected street grid, they are not limited to any single quadrant. Traffic calming features were often co-located with greenways, reinforcing their intended function as low-stress cycling routes. Over 40 percent of intersections lacked both greenways and calming features, creating a natural baseline group. 
 
-Neighborhood greenways are distributed across Portland, spanning both east and west sides of the city. While coverage is denser in areas with a connected street grid, they are not limited to any single quadrant. Traffic calming features were often co-located with greenways, reinforcing their intended function as low-stress cycling routes. Over 40 percent of intersections lacked both greenways and calming features, creating a natural baseline group. Figure \@ref(fig:infra-grouping) compares total crashes and bicycle- or pedestrian-involved crashes across these infrastructure groupings, highlighting the greater concentration of active transportation crashes at greenway intersections where cyclists and pedestrians are more likely to travel.  
-
-```{r infra-grouping, fig.cap="Figure 3: Crash counts by infrastructure grouping, comparing all crashes with bicycle- and pedestrian-involved crashes.", out.width="80%"}
-# Create infrastructure grouping for all crashes
-all_crashes_grouped <- crash_joined %>%
-  mutate(
-    infra_group = case_when(
-      has_greenway & calming_flag ~ "Greenway + Calming",
-      has_greenway & !calming_flag ~ "Greenway Only",
-      !has_greenway & calming_flag ~ "Calming Only",
-      TRUE ~ "No Infrastructure"
-    ),
-    crash_type = if_else(bike_flg | ped_flg, "Bike/Ped", "All Crashes")
-  )
-
-# Summarize crash counts by infra group and type
-infra_summary <- all_crashes_grouped %>%
-  group_by(infra_group, crash_type) %>%
-  summarise(crash_count = n(), .groups = "drop")
-
-# Plot: side-by-side bars for all crashes vs bike/ped
-ggplot(infra_summary, aes(x = infra_group, y = crash_count, fill = crash_type)) +
-  geom_col(position = "dodge") +
-  labs(x = "Infrastructure Group", y = "Crash Count", fill = "Crash Type") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
+![**Figure 3:** Crash counts by infrastructure grouping, comparing all crashes with bicycle- and pedestrian-involved crashes.](figures/infra-grouping.png)
 
 ### Crash Rates by Infrastructure and Traffic Volume  
 
-To account for differences in traffic exposure, we calculated crash rates per intersection across combined infrastructure groupings (greenways and calming features) and stratified by traffic volume tertiles (low, medium, high). As shown in Figure \@ref(fig:volume-crash), crash rates were highest in high-volume areas, regardless of infrastructure presence. However, intersections with calming features—particularly when paired with greenways—had lower crash rates than those lacking interventions or with greenways alone within this high-volume group.  
+To account for differences in traffic exposure, we calculated crash rates per intersection across combined infrastructure groupings (greenways and calming features) and stratified by traffic volume tertiles (low, medium, high). As shown in Figure 4, crash rates were highest in high-volume areas, regardless of infrastructure presence. However, intersections with calming features—particularly when paired with greenways—had lower crash rates than those lacking interventions or with greenways alone within this high-volume group.  
 
-In medium- and low-volume areas, crash rates were substantially lower overall, with only minor differences between infrastructure types. This suggests that infrastructure interventions may have the greatest impact where traffic volumes, and therefore exposure risk, are highest.
-```{r volume-crash, fig.cap="Figure 4: Bicycle- and pedestrian-involved crash rates per intersection by infrastructure grouping and traffic volume tertile.", out.width="80%"}
-# Remove old adt_volume variants
-intersection_eda <- intersection_eda %>%
-  select(-matches("^adt_volume"))
+In medium- and low-volume areas, crash rates were substantially lower overall, with only minor differences between infrastructure types. This suggests that infrastructure interventions may have the greatest impact where traffic volumes, and therefore exposure risk, are highest.  
 
-# Clean and join traffic volume
-vcounts_clean <- vcounts %>%
-  mutate(intersection_id = as.integer(intersection_id)) %>%
-  group_by(intersection_id) %>%
-  summarise(adt_volume = mean(adt_volume, na.rm = TRUE), .groups = "drop")
-
-intersection_eda <- intersection_eda %>%
-  mutate(intersection_id = as.integer(intersection_id)) %>%
-  left_join(vcounts_clean, by = "intersection_id")
-
-# Create volume groups (low/med/high)
-volume_cutoffs <- quantile(intersection_eda$adt_volume, probs = c(1/3, 2/3), na.rm = TRUE)
-intersection_eda <- intersection_eda %>%
-  mutate(volume_group = case_when(
-    !is.na(adt_volume) & adt_volume <= volume_cutoffs[1] ~ "Low",
-    !is.na(adt_volume) & adt_volume <= volume_cutoffs[2] ~ "Medium",
-    !is.na(adt_volume) ~ "High",
-    TRUE ~ NA_character_
-  ))
-
-# Plot crash rates
-intersection_eda %>%
-  mutate(infra_combo = case_when(
-    has_calming == "Yes" & has_greenway == "Yes" ~ "Greenway + Calming",
-    has_calming == "Yes" & has_greenway == "No"  ~ "Calming Only",
-    has_calming == "No"  & has_greenway == "Yes" ~ "Greenway Only",
-    has_calming == "No"  & has_greenway == "No"  ~ "Neither"
-  )) %>%
-  filter(!is.na(volume_group), !is.na(infra_combo)) %>%
-  group_by(volume_group, infra_combo) %>%
-  summarise(intersections = n(),
-            total_crashes = sum(bikeped_crashes, na.rm = TRUE),
-            crash_rate = total_crashes / intersections,
-            .groups = "drop") %>%
-  ggplot(aes(x = infra_combo, y = crash_rate, fill = volume_group)) +
-  geom_col(position = "dodge") +
-  facet_wrap(~volume_group) +
-  labs(x = "Infrastructure Combination",
-       y = "Crashes per Intersection",
-       fill = "Volume Group") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 30, hjust = 1))
-```
+![**Figure 4:** Bicycle- and pedestrian-involved crash rates per intersection by infrastructure grouping and traffic volume tertile.](figures/volume-crash.png)
 
 ### Speed Environment  
 
-Analysis of posted speed limits revealed clear differences between street types. As shown in Figure \@ref(fig:speed-boxplot), greenways consistently align with lower posted speed limits, while regular streets display a broader range of speed environments. Crashes resulting in severe outcomes were concentrated at higher speed limits, underscoring the relationship between speed and injury severity.
+Analysis of posted speed limits revealed clear differences between street types. As shown in Figure 5, greenways consistently align with lower posted speed limits, while regular streets display a broader range of speed environments. Crashes resulting in severe outcomes were concentrated at higher speed limits, underscoring the relationship between speed and injury severity.  
 
-```{r speed-boxplot, fig.cap="Figure 5: Posted speed limits by street type and crash severity.", out.width="80%"}
-speed_combo_crashes <- crash_joined %>%
-  filter(!is.na(post_speed_lmt_val)) %>%
-  mutate(
-    group = case_when(
-      has_greenway ~ "Greenway",
-      TRUE ~ "Regular Street"
-    )
-  )
-
-ggplot(speed_combo_crashes, aes(x = group, y = post_speed_lmt_val, fill = crash_svrty_long_desc)) +
-  geom_boxplot(position = position_dodge(0.8)) +
-  labs(
-    x = "Street Type",
-    y = "Speed Limit (mph)",
-    fill = "Crash Severity"
-  ) +
-  theme_minimal()
-```
+![**Figure 5:** Posted speed limits by street type and crash severity.](figures/speed-boxplot.png)
 
 ### Spatial Patterns  
 
-Mapping bicycle- and pedestrian-involved crashes alongside Portland’s greenway network and traffic calming features provided a citywide view of crash concentrations and infrastructure coverage (Figure \@ref(fig:spatial-map)). The interactive visualization highlights intersections with high crash density and allows comparison against existing greenways and calming measures. This contextual map informed later modeling by illustrating where crashes cluster relative to infrastructure investments.
+Mapping bicycle- and pedestrian-involved crashes alongside Portland’s greenway network and traffic calming features provided a citywide view of crash concentrations and infrastructure coverage (Figure 6).  
 
-```{r spatial-map, fig.cap="Figure 6: Interactive map of bicycle- and pedestrian-involved crashes, greenways, and traffic calming features across Portland.", out.width="100%"}
-# Convert network and calming to sf
-network_sf <- network %>%
-  filter(!is.na(lat) & !is.na(lon)) %>%
-  st_as_sf(coords = c("lon", "lat"), crs = 4326)
+<iframe src="figures/spatial-map.html" width="100%" height="600px" style="border:none;"></iframe>
 
-calming_sf <- calming %>%
-  filter(!is.na(lat) & !is.na(lon)) %>%
-  st_as_sf(coords = c("lon", "lat"), crs = 4326)
+**Figure 6:** Interactive map of bicycle- and pedestrian-involved crashes, greenways, and traffic calming features.
 
-# Ensure crashes are also sf
-crashes_sf <- crash_joined %>%
-  filter(bike_flg | ped_flg) %>%
-  st_as_sf(coords = c("longitude", "latitude"), crs = 4326)
-
-# Build leaflet map
-leaflet() %>%
-  addProviderTiles("CartoDB.Positron") %>%
-  
-  # Crashes
-  addCircleMarkers(data = crashes_sf,
-                   radius = 2,
-                   color = "#f37b83",
-                   stroke = FALSE,
-                   fillOpacity = 0.4,
-                   group = "Crashes") %>%
-  
-  # Greenways
-  addCircleMarkers(data = network_sf,
-                   radius = 2,
-                   color = "#36B37E",
-                   stroke = FALSE,
-                   fillOpacity = 0.6,
-                   group = "Greenways") %>%
-  
-  # Calming Features
-  addCircleMarkers(data = calming_sf,
-                   radius = 3,
-                   color = "#007ACC",
-                   stroke = TRUE,
-                   weight = 1,
-                   fillOpacity = 0.8,
-                   group = "Calming Features") %>%
-  
-  # Layer controls
-  addLayersControl(overlayGroups = c("Crashes", "Greenways", "Calming Features"),
-                   options = layersControlOptions(collapsed = FALSE))
-```
 
 These exploratory findings informed our subsequent modeling strategy by highlighting key relationships between crash rates, infrastructure presence, traffic exposure, and speed environments at the intersection level. By integrating these variables into our schema and validating them through EDA, we established a foundation for statistical modeling aimed at quantifying their combined effects on bicycle- and pedestrian-involved crash risk.
