@@ -11,6 +11,7 @@ format:
     theme:
       light: lightly
       dark: darkly
+output_dir: "_output"
 ---
 
 {{< include _01_intro.qmd >}}

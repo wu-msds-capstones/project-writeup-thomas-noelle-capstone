@@ -29,9 +29,11 @@ We generated the intersections table using the osmnx Python package and OpenStre
 ### Excluded Data  
 While initially considered, we excluded the recommended bicycle routes dataset after determining that it duplicated information available in the bicycle network layer and lacked the detail needed for meaningful comparison. The data could not be confidently joined and was unlikely to add new explanatory power to our analysis. Proxies for risk, such as crash severity, lighting, and calming infrastructure, were already present in our model.
 
-### Final Schema  
+### Final Schema
+
 All datasets were aligned to WGS 84 and cleaned to support accurate joining. Each resulting table contains only the fields necessary for analysis and follows consistent naming conventions. Each record—whether a crash, street light, or calming feature—can now be attributed to a specific intersection. This enables comparison of safety outcomes based on local infrastructure conditions and supports analysis at the intersection level.
 
-![Relational schema diagram showing normalized structure around `intersections`, with foreign key joins from crashes, bicycle infrastructure, street lights, traffic calming features, traffic volumes, and speed limits.](../figures/schema.pdf)
+Figure 1 below illustrates the final database schema, which is normalized around a central intersections table and joined to cleaned infrastructure datasets using shared intersection IDs or spatial proximity.
 
-**Figure 1.** Relational schema for capstone database showing intersection-level joins across datasets.
+![Figure 1. Relational schema showing final data model.](figures/schema.pdf)
+
