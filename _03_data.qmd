@@ -40,10 +40,6 @@ Figure 1 below illustrates the final database schema, which is normalized around
 
 ![Figure 1: ER diagram of the created tables and their relationships.](figures/schema.png)
 
-# Data Engineering and Early Exploration
-
-Building this database required extensive preprocessing and integration across multiple spatial and tabular datasets. These steps were essential to ensure accurate intersection-level joins and to support the subsequent exploratory analyses and modeling phases.
-
 # Data Engineering and Exploration
 
 Building this database required extensive preprocessing and integration across multiple spatial and tabular datasets. These steps were essential to ensure accurate intersection-level joins and to support subsequent exploratory analyses and modeling.
@@ -69,7 +65,7 @@ Validation procedures confirmed the uniqueness of `intersection_id` values withi
 
 ### Crash Trends and Severity
 
-As shown in Figure \@ref(fig:crash-trends), annual crash counts were relatively stable with a moderate decline during 2019–2021, while bicycle- and pedestrian-involved crashes remained a small but persistent share of all crashes.
+As shown in Figure \@ref(fig:crash-trends), annual crash counts were relatively stable with a moderate decline during 2019–2021 (COVID19 pandemic), while bicycle- and pedestrian-involved crashes remained a small but persistent share of all crashes.
 
 ```{r crash-trends, fig.cap="Figure 2a: Annual crash counts comparing all crashes with those involving bicycles or pedestrians.", out.width="80%"}
 crash_counts <- crashes %>%
@@ -261,3 +257,5 @@ leaflet() %>%
   addLayersControl(overlayGroups = c("Crashes", "Greenways", "Calming Features"),
                    options = layersControlOptions(collapsed = FALSE))
 ```
+
+These exploratory findings informed our subsequent modeling strategy by highlighting key relationships between crash rates, infrastructure presence, traffic exposure, and speed environments at the intersection level. By integrating these variables into our schema and validating them through EDA, we established a foundation for statistical modeling aimed at quantifying their combined effects on bicycle- and pedestrian-involved crash risk.
