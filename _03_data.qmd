@@ -1,30 +1,37 @@
 # Data
 This project uses a variety of spatial and tabular datasets from public sources, including the Oregon Department of Transportation (ODOT), the Portland Bureau of Transportation (PBOT), and Oregon’s GEOHub. Our analysis focuses on intersection-level crash patterns from 2007 to 2022 and incorporates information on infrastructure, lighting, traffic volumes, and population.
 
-We created a fully normalized PostgreSQL database structured around a master `intersections` table. All other datasets were cleaned, filtered, and joined to this central reference using either shared intersection identifiers or approximate spatial joins based on latitude and longitude. This structure enabled consistent and flexible querying by location and allowed us to integrate diverse datasets into a unified schema.
+To ensure we were leveraging all available data sources and interpreting them appropriately, we conducted early meetings with members of the City of Portland’s Vision Zero team and a senior transportation planner at Parametrix specializing in active transportation and safety. These conversations informed our understanding of where relevant infrastructure data was stored, how various features were used in practice, and which fields could support reliable spatial joins. We discussed common limitations in existing datasets—including inconsistent naming conventions, missing coordinates, and duplicate infrastructure records—and received guidance on which types of infrastructure were most relevant to current safety planning efforts. These meetings also shaped our decision to normalize the schema around a master intersections table and directly influenced how we defined feature categories such as neighborhood greenways, traffic calming, and lighting coverage.
+
+We created a fully normalized PostgreSQL database structured around a master intersections table. All other datasets were cleaned, filtered, and joined to this central reference using either shared intersection identifiers or approximate spatial joins based on latitude and longitude. This structure enabled consistent and flexible querying by location and allowed us to integrate diverse datasets into a unified schema (see Figure 1).
 
 ### Crash Data  
-The core of our analysis is built on over 350,000 crash records from ODOT. We filtered this dataset to include only bicycle- and pedestrian-involved crashes and dropped entries with missing or invalid coordinates. We standardized street names and assigned each crash to an `intersection_id` based on a match between reported street names and our intersections table. The resulting `crashes` table contains fields such as date, severity, crash type, and intersection assignment.
+The core of our analysis is built on over 350,000 crash records from ODOT. We filtered this dataset to include only bicycle- and pedestrian-involved crashes and dropped entries with missing or invalid coordinates. We standardized street names and assigned each crash to an intersection_id based on a match between reported street names and our intersections table. The resulting crashes table contains fields such as date, severity, crash type, and intersection assignment.
 
 ### Bicycle Infrastructure  
-We used PBOT’s bicycle network dataset to represent infrastructure for cyclists in Portland. This data includes named facilities such as bike lanes, greenways, and paths, along with the year each segment was built. Many fields were incomplete or inconsistently formatted, so we standardized facility types and installation dates. Segments were then linked to nearby intersections based on proximity and street name references. The cleaned output populates the `bicycle_network` table.
+We used PBOT’s bicycle network dataset to represent infrastructure for cyclists in Portland. This data includes named facilities such as bike lanes, greenways, and paths, along with the year each segment was built. Many fields were incomplete or inconsistently formatted, so we standardized facility types and installation dates. Segments were then linked to nearby intersections based on proximity and street name references. The cleaned output populates the bicycle_network table.
 
 ### Lighting  
-The `street_lights` dataset includes point-level records with clean coordinates and attributes such as ownership and power type. We validated and transformed coordinates to WGS 84, then performed a spatial join to assign each light to its nearest intersection. We calculated the number of lights and total wattage per intersection as proxy indicators of lighting coverage.
+The street_lights dataset includes point-level records with clean coordinates and attributes such as ownership and power type. We validated and transformed coordinates to WGS 84, then performed a spatial join to assign each light to its nearest intersection. We calculated the number of lights and total wattage per intersection as proxy indicators of lighting coverage.
 
 ### Traffic Calming Features  
-This dataset included point features such as speed humps, curb extensions, and raised crosswalks. Records had valid coordinates but inconsistent identifiers, which we cleaned and filtered to remove unknown or unplaced entries. We then joined features to intersections using spatial proximity. The resulting `traffic_calming_features` table allows us to flag the presence and type of calming measures at each location.
+This dataset included point features such as speed humps, curb extensions, and raised crosswalks. Records had valid coordinates but inconsistent identifiers, which we cleaned and filtered to remove unknown or unplaced entries. We then joined features to intersections using spatial proximity. The resulting traffic_calming_features table allows us to flag the presence and type of calming measures at each location.
 
 ### Traffic Volume  
-The `traffic_volume_counts` dataset includes detailed counts by direction, time of day, and date. We aggregated volume data at the intersection level and joined records using spatial coordinates. This variable helps us control for exposure in later modeling by approximating how many vehicles pass through each location.
+The traffic_volume_counts dataset includes detailed counts by direction, time of day, and date. We aggregated volume data at the intersection level and joined records using spatial coordinates. This variable helps us control for exposure in later modeling by approximating how many vehicles pass through each location.
+
+### Speed Limits
+Speed limit data was not included in our original schema due to missing coordinates and inconsistent street identifiers. However, after identifying its potential value for modeling crash severity, we reprocessed and integrated the data based on proximity to each intersection. Where a speed limit could be confidently assigned, we added it to the intersections table as an additional variable
 
 ### Intersections  
-We generated the intersections table using the `osmnx` Python package and OpenStreetMap street data. The table includes a deduplicated list of intersections across Portland, with each entry containing a unique `intersection_id`, latitude, longitude, and the names of the intersecting streets. The table serves as the central node for all joins and normalization steps in the database.
+We generated the intersections table using the osmnx Python package and OpenStreetMap street data. The table includes a deduplicated list of intersections across Portland, with each entry containing a unique intersection_id, latitude, longitude, and the names of the intersecting streets. The table serves as the central node for all joins and normalization steps in the database.
 
 ### Excluded Data  
-While initially considered, removed the recommended bicycle routes dataset after determining that it duplicated information available in the bicycle network layer and lacked the detail needed for meaningful comparison. 
-&&&&&While initially considered, we excluded the speed limit dataset due to the lack of reliable coordinates and inconsistent street naming. 
-&&&&&&In both cases, the data could not be confidently joined or was unlikely to add new explanatory power to our analysis. Proxies for risk, such as crash severity, lighting, and calming infrastructure, were already present in our model.
+While initially considered, we excluded the recommended bicycle routes dataset after determining that it duplicated information available in the bicycle network layer and lacked the detail needed for meaningful comparison. The data could not be confidently joined and was unlikely to add new explanatory power to our analysis. Proxies for risk, such as crash severity, lighting, and calming infrastructure, were already present in our model.
 
 ### Final Schema  
 All datasets were aligned to WGS 84 and cleaned to support accurate joining. Each resulting table contains only the fields necessary for analysis and follows consistent naming conventions. Each record—whether a crash, street light, or calming feature—can now be attributed to a specific intersection. This enables comparison of safety outcomes based on local infrastructure conditions and supports analysis at the intersection level.
+
+![Relational schema diagram showing normalized structure around `intersections`, with foreign key joins from crashes, bicycle infrastructure, street lights, traffic calming features, traffic volumes, and speed limits.](../figures/schema.pdf)
+
+**Figure 1.** Relational schema for capstone database showing intersection-level joins across datasets.
