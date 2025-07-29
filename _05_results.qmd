@@ -1,3 +1,10 @@
 # Results
 
-We are examining many different types of models
+We will display the results from the previously mentioned models in a table, as shown in the figure below. 
+
+```{r}
+library(knitr)
+library(readxl)
+kable(read_excel("modeling_results.xlsx"))
+```
+

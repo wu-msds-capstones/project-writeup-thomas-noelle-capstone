@@ -524,7 +524,353 @@ div.csl-indent {
 </section>
 <section id="results" class="level1">
 <h1>Results</h1>
-<p>We are examining many different types of models</p>
+<p>We will display the results from the previously mentioned models in a table, as shown in the figure below.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 14%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 40%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Data Subset</th>
+<th style="text-align: left;">Model Type</th>
+<th style="text-align: left;">Feature Subset</th>
+<th style="text-align: left;">Outcome Type</th>
+<th style="text-align: left;">Features</th>
+<th style="text-align: right;">Model Kappa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">RF</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Injury Non Injured</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">RF</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Fatal Non Fatal</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">RF</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">RF</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Injury Non Injured</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">RF</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Fatal Non Fatal</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">RF</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">Logistic Regression</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Injury Non Injured</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">Logistic Regression</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Fatal Non Fatal</td>
+<td style="text-align: left;">Drugs involved, crash speed involved, alcohol involved</td>
+<td style="text-align: right;">0.0244</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">Logistic Regression</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">Logistic Regression</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Injury Non Injured</td>
+<td style="text-align: left;">Speed limit, infrastructure, bike lane</td>
+<td style="text-align: right;">0.0110</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">Logistic Regression</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Fatal Non Fatal</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">Logistic Regression</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">LASSO</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Injury Non Injured</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">LASSO</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Fatal Non Fatal</td>
+<td style="text-align: left;">Drugs involved, Marijuana involved, crash speed involved</td>
+<td style="text-align: right;">0.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">LASSO</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">LASSO</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Injury Non Injured</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">LASSO</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Fatal Non Fatal</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">LASSO</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">Ridge</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Injury Non Injured</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">Ridge</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Fatal Non Fatal</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">Ridge</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">Ridge</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Injury Non Injured</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">Ridge</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Fatal Non Fatal</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All crashes</td>
+<td style="text-align: left;">Ridge</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bike only</td>
+<td style="text-align: left;">RF</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bike only</td>
+<td style="text-align: left;">RF</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bike only</td>
+<td style="text-align: left;">Logistic Regression</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bike only</td>
+<td style="text-align: left;">Logistic Regression</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bike only</td>
+<td style="text-align: left;">LASSO</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bike only</td>
+<td style="text-align: left;">LASSO</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bike only</td>
+<td style="text-align: left;">Ridge</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bike only</td>
+<td style="text-align: left;">Ridge</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pedestrian only</td>
+<td style="text-align: left;">RF</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pedestrian only</td>
+<td style="text-align: left;">RF</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pedestrian only</td>
+<td style="text-align: left;">Logistic Regression</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pedestrian only</td>
+<td style="text-align: left;">Logistic Regression</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pedestrian only</td>
+<td style="text-align: left;">LASSO</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pedestrian only</td>
+<td style="text-align: left;">LASSO</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pedestrian only</td>
+<td style="text-align: left;">Ridge</td>
+<td style="text-align: left;">All</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pedestrian only</td>
+<td style="text-align: left;">Ridge</td>
+<td style="text-align: left;">Infrastructural</td>
+<td style="text-align: left;">Degree of Injury</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </section>
 <section id="conclusions" class="level1">
 <h1>Conclusions</h1>
