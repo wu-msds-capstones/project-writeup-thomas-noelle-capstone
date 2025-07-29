@@ -1,36 +1,36 @@
 # Data & Data Engineering
 This project uses a variety of spatial and tabular datasets from public sources, including the Oregon Department of Transportation (ODOT), the Portland Bureau of Transportation (PBOT), and Oregon’s GEOHub. Our analysis focuses on intersection-level crash patterns from 2007 to 2022 and incorporates information on infrastructure, lighting, traffic volumes, and speed limits.
 
-To ensure we were leveraging all available data sources and interpreting them appropriately, we conducted early meetings with members of the City of Portland’s Vision Zero team and a senior transportation planner at Parametrix specializing in active transportation and safety. These conversations informed our understanding of where relevant infrastructure data was stored, how various features were used in practice, and which fields could support reliable spatial joins. We discussed common limitations in existing datasets, including inconsistent naming conventions, missing coordinates, and duplicate infrastructure records; and received guidance on which types of infrastructure were most relevant to current safety planning efforts. These meetings also shaped our decision to normalize the schema around a master intrsct table and directly influenced how we defined feature categories such as neighborhood greenways, traffic calming, and lighting coverage.
+To ensure we were leveraging all available data sources and interpreting them appropriately, we conducted early meetings with members of the City of Portland’s Vision Zero team and a senior transportation planner at Parametrix specializing in active transportation and safety. These conversations informed our understanding of where relevant infrastructure data was stored, how various features were used in practice, and which fields could support reliable spatial joins. We discussed common limitations in existing datasets, including inconsistent naming conventions, missing coordinates, and duplicate infrastructure records; and received guidance on which types of infrastructure were most relevant to current safety planning efforts. These meetings also shaped our decision to normalize the schema around a master `intrsct` table and directly influenced how we defined feature categories such as neighborhood greenways, traffic calming, and lighting coverage.
 
-We created a fully normalized PostgreSQL database structured around the intrsct table. All other datasets were cleaned, filtered, and joined to this central reference using either shared intersection identifiers or approximate spatial joins based on latitude and longitude. This structure enabled consistent and flexible querying by location and allowed us to integrate diverse datasets into a unified schema (see Figure 1).
+We created a fully normalized PostgreSQL database structured around the `intrsct` table. All other datasets were cleaned, filtered, and joined to this central reference using either shared intersection identifiers or approximate spatial joins based on latitude and longitude. This structure enabled consistent and flexible querying by location and allowed us to integrate diverse datasets into a unified schema (see Figure 1).
 
-### Crash Data (crashes)
-The core of our analysis is built on over 350,000 crash records from ODOT. We filtered this dataset to include only bicycle- and pedestrian-involved crashes and dropped entries with missing or invalid coordinates. Street names were standardized to ensure alignment during joins, and each crash was assigned an intersection_id based on matches to the intrsct table. The crashes table contains fields such as crash date (crash_dt), severity (crash_svrty_long_desc), highest injury severity (highest_inj_svrty_desc), and participant counts (tot_pedcycl_cnt, tot_ped_cnt).
+### Crash Data (`crashes`)
+The core of our analysis is built on over 350,000 crash records from ODOT. We filtered this dataset to include only bicycle- and pedestrian-involved crashes and dropped entries with missing or invalid coordinates. Street names were standardized to ensure alignment during joins, and each crash was assigned an `intersection_id` based on matches to the `intrsct` table. The crashes table contains fields such as crash date (`crash_dt`), severity (`crash_svrty_long_desc`), highest injury severity (`highest_inj_svrty_desc`), and participant counts (`tot_pedcycl_cnt`, `tot_ped_cnt`).
 
-### Bicycle Infrastructure (network)
-The network table, derived from PBOT’s bicycle network dataset, catalogs bicycle infrastructure such as neighborhood greenways, bike lanes, and multi-use paths. Fields include facility type (facility) and installation year (year_built). Records were standardized and spatially joined to nearby intersections in intrsct to enable intersection-level comparisons of infrastructure and crash outcomes.
+### Bicycle Infrastructure (`network`)
+The `network` table, derived from PBOT’s bicycle network dataset, catalogs bicycle infrastructure such as neighborhood greenways, bike lanes, and multi-use paths. Fields include facility type (`facility`) and installation year (`year_built`). Records were standardized and spatially joined to nearby intersections in `intrsct` to enable intersection-level comparisons of infrastructure and crash outcomes.
 
-### Street Lighting (slights)
-The slights table contains point-level records of streetlights with attributes including wattage (watts) and lumen output (lumen). We transformed coordinates to WGS 84 and joined each light to its nearest intersection in intrsct. Aggregated fields, such as total wattage and light count per intersection, serve as proxies for illumination coverage.
+### Street Lighting (`slights`)
+The slights table contains point-level records of streetlights with attributes including wattage (`watts`) and lumen output (`lumen`). We transformed coordinates to WGS 84 and joined each light to its nearest intersection in `intrsct`. Aggregated fields, such as total wattage and light count per intersection, serve as proxies for illumination coverage.
 
-### Traffic Calming Features (calming)
-The calming table documents features such as speed humps, raised crosswalks, and curb extensions. Each record includes a feature type (feature_type) and coordinates, which were spatially joined to intrsct to create intersection-level calming indicators.
+### Traffic Calming Features (`calming`)
+The calming table documents features such as speed humps, raised crosswalks, and curb extensions. Each record includes a feature type (`feature_type`) and coordinates, which were spatially joined to `intrsct` to create intersection-level calming indicators.
 
-### Traffic Volume (vcounts)
-The vcounts table contains vehicle counts by intersection, including AM and PM peak (am_volume, pm_volume) and average daily traffic (avg_daily_traffic). These data help control for traffic exposure in our later modeling and provide contextual insights into crash density relative to traffic flow.
+### Traffic Volume (`vcounts`)
+The `vcounts` table contains vehicle counts by intersection, including AM and PM peak (`am_volume`, `pm_volume`) and average daily traffic counts (`avg_daily_traffic`). These data help control for traffic exposure in our later modeling and provide contextual insights into crash density relative to traffic flow.
 
-### Speed Limits (slimits)
-Initially excluded due to incomplete identifiers, the speed limit dataset was later processed and integrated. We used proximity-based spatial joins to assign speed limits (speed_limit) to intersections in intrsct. This variable supports analysis of posted speed environments in relation to crash severity and frequency.
+### Speed Limits (`slimits`)
+Initially excluded due to incomplete identifiers, the speed limit dataset was later processed and integrated. We used proximity-based spatial joins to assign speed limits (`speed_limit`) to intersections in `intrsct`. This variable supports analysis of posted speed environments in relation to crash severity and frequency.
 
-### Intersections (intrsct)
-The intrsct table serves as the schema’s hub, generated using the osmnx Python package and OpenStreetMap data. Each record includes an intersection_id, intersecting street names (from_street, to_street), and geographic coordinates. All other tables are joined to this central reference via intersection_id.
+### Intersections (`intrsct`)
+The `intrsct` table serves as the schema’s hub, generated using the `osmnx` Python package and OpenStreetMap data. Each record includes an `intersection_id`, intersecting street names (`from_street`, `to_street`), and geographic coordinates. All other tables are joined to this central reference via `intersection_id`.
 
-### Population (population)
-We also incorporated a population table containing annual citywide population estimates. While it does not connect directly to the intersection-level schema, it supports per capita crash rate calculations and provides demographic context for interpreting trends in active transportation safety.
+### Population (`population`)
+We also incorporated a `population` table containing annual citywide population estimates. While it does not connect directly to the intersection-level schema, it supports per capita crash rate calculations and provides demographic context for interpreting trends in active transportation safety.
 
 ### Excluded Data  
-While initially considered, we excluded the recommended_bicycle_routes dataset after determining that it duplicated information available in the bicycle network layer and lacked the detail needed for meaningful comparison. The data could not be confidently joined and was unlikely to add new explanatory power to our analysis. Proxies for risk, such as crash severity, lighting, and calming infrastructure, were already present in our model.
+While initially considered, we excluded the `recommended_bicycle_routes` dataset after determining that it duplicated information available in the bicycle network layer and lacked the detail needed for meaningful comparison. The data could not be confidently joined and was unlikely to add new explanatory power to our analysis. Proxies for risk, such as crash severity, lighting, and calming infrastructure, were already present in our model.
 
 ### Schema Normalization
 
@@ -47,7 +47,7 @@ Building this database required extensive preprocessing and integration across m
 ## Data Engineering Workflow
 
 ### Data Acquisition and Cleaning  
-We obtained data from the Oregon Department of Transportation (ODOT), the Portland Bureau of Transportation (PBOT), and Oregon GEOHub in their original formats, including CSV files, shapefiles, and API outputs. Cleaning steps focused on aligning datasets both geographically and structurally. Crashes were filtered to include only those within Portland city limits and non-highway segments. Records with null or invalid coordinates, such as those present in the `crashes` and `slimits` tables, were removed. Street names were standardized across `crashes`, `network`, and `calming` to ensure join consistency. Categorical fields, such as traffic calming feature codes, were encoded uniformly, and naming inconsistencies (e.g., `WAY` versus `WY`) were corrected. For crashes without an initial intersection match, we used nearest-neighbor joins to impute `intersection_id` assignments, validating the resulting joins through interactive mapping. These processes reduced the crashes dataset from 356,280 metro-area records to 157,426 Portland-specific records suitable for integration with infrastructure layers.
+We obtained data from the Oregon Department of Transportation (ODOT), the Portland Bureau of Transportation (PBOT), and Oregon GEOHub in their original formats, including CSV files, shapefiles, and API outputs. Cleaning steps focused on aligning datasets both geographically and structurally. Crashes were filtered to include only those within Portland city limits and non-highway segments. Records with null or invalid coordinates, such as those present in the `crashes` and `slimits` tables, were removed. Street names were standardized across `crashes`, `network`, and `calming` to ensure join consistency. Categorical fields, such as traffic calming feature codes, were encoded uniformly, and naming inconsistencies (e.g., `WAY` versus `WY`) were corrected. For crashes without an initial intersection match, we used nearest-neighbor joins to impute `intersection_id` assignments, validating the resulting joins through interactive mapping. These processes reduced the crashes dataset from 356,280 metro-area records to 94,841 Portland-specific records suitable for integration with infrastructure layers.
 
 ### Schema Normalization  
 To integrate these datasets, we implemented a hub-and-spoke relational schema anchored by the `intrsct` table, a deduplicated intersections dataset generated using the `osmnx` package. All supporting tables—including `crashes`, `network`, `slights`, `calming`, `vcounts`, and `slimits`—were linked to `intrsct` via `intersection_id`, either directly or through proximity-based spatial joins. This approach allowed for scalable, reproducible analysis at the intersection level and supported efficient feature aggregation (Figure 1).
@@ -58,48 +58,3 @@ We derived several intersection-level variables to capture infrastructure and en
 ### Data Validation  
 Validation procedures confirmed the uniqueness of `intersection_id` values within the `intrsct` table and quantified the rate of unmatched joins. Approximately 25 percent of filtered crashes initially lacked an intersection match; these were reassigned using spatial proximity within a 100-meter buffer, with results verified through visual inspection in Leaflet. These steps ensured a robust, geographically coherent database suitable for subsequent exploratory analysis and modeling.
 
-
----
-
-## Exploratory Data Analysis (EDA)
-
-### Crash Trends and Severity
-
-As shown in Figure 2a, annual crash counts were relatively stable with a moderate decline during 2019–2021 (COVID-19 pandemic), while bicycle- and pedestrian-involved crashes remained a small but persistent share of all crashes.
-
-![**Figure 2a:** Annual crash counts comparing all crashes with those involving bicycles or pedestrians.](figures/crash-trends.png)
-
-Similarly, Figure 2b illustrates the distribution of injury severity levels for all crashes compared to those involving bicycles or pedestrians.
-
-![**Figure 2b:** Distribution of injury severity levels comparing all crashes with bicycle and pedestrian-involved crashes.](figures/severity-dist.png)
-
-### Infrastructure Coverage and Grouping
-
-Neighborhood greenways are distributed across Portland, spanning both east and west sides of the city. While coverage is denser in areas with a connected street grid, they are not limited to any single quadrant. Traffic calming features were often co-located with greenways, reinforcing their intended function as low-stress cycling routes. Over 40 percent of intersections lacked both greenways and calming features, creating a natural baseline group. 
-
-![**Figure 3:** Crash counts by infrastructure grouping, comparing all crashes with bicycle- and pedestrian-involved crashes.](figures/infra-grouping.png)
-
-### Crash Rates by Infrastructure and Traffic Volume  
-
-To account for differences in traffic exposure, we calculated crash rates per intersection across combined infrastructure groupings (greenways and calming features) and stratified by traffic volume tertiles (low, medium, high). As shown in Figure 4, crash rates were highest in high-volume areas, regardless of infrastructure presence. However, intersections with calming features—particularly when paired with greenways—had lower crash rates than those lacking interventions or with greenways alone within this high-volume group.  
-
-In medium- and low-volume areas, crash rates were substantially lower overall, with only minor differences between infrastructure types. This suggests that infrastructure interventions may have the greatest impact where traffic volumes, and therefore exposure risk, are highest.  
-
-![**Figure 4:** Bicycle- and pedestrian-involved crash rates per intersection by infrastructure grouping and traffic volume tertile.](figures/volume-crash.png)
-
-### Speed Environment  
-
-Analysis of posted speed limits revealed clear differences between street types. As shown in Figure 5, greenways consistently align with lower posted speed limits, while regular streets display a broader range of speed environments. Crashes resulting in severe outcomes were concentrated at higher speed limits, underscoring the relationship between speed and injury severity.  
-
-![**Figure 5:** Posted speed limits by street type and crash severity.](figures/speed-boxplot.png)
-
-### Spatial Patterns  
-
-Mapping bicycle- and pedestrian-involved crashes alongside Portland’s greenway network and traffic calming features provided a citywide view of crash concentrations and infrastructure coverage (Figure 6).  
-
-<iframe src="figures/spatial-map.html" width="100%" height="600px" style="border:none;"></iframe>
-
-**Figure 6:** Interactive map of bicycle- and pedestrian-involved crashes, greenways, and traffic calming features.
-
-
-These exploratory findings informed our subsequent modeling strategy by highlighting key relationships between crash rates, infrastructure presence, traffic exposure, and speed environments at the intersection level. By integrating these variables into our schema and validating them through EDA, we established a foundation for statistical modeling aimed at quantifying their combined effects on bicycle- and pedestrian-involved crash risk.

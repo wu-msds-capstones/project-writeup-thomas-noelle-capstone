@@ -1,1 +1,72 @@
 # Analysis
+
+## Exploratory Data Analysis (EDA)
+
+### Crash Trends and Severity
+
+As shown in Figure 2a, annual crash counts were relatively stable with a moderate decline during 2019–2021 (COVID-19 pandemic), while bicycle- and pedestrian-involved crashes remained a small but persistent share of all crashes.
+
+![**Figure 2a:** Annual crash counts comparing all crashes with those involving bicycles or pedestrians.](figures/crash-trends.png)
+
+Similarly, Figure 2b illustrates the distribution of injury severity levels for all crashes compared to those involving bicycles or pedestrians.
+
+![**Figure 2b:** Distribution of injury severity levels comparing all crashes with bicycle and pedestrian-involved crashes.](figures/severity-dist.png)
+
+### Infrastructure Coverage and Grouping
+
+Neighborhood greenways are distributed across Portland, spanning both east and west sides of the city. While coverage is denser in areas with a connected street grid, they are not limited to any single quadrant. Traffic calming features were often co-located with greenways, reinforcing their intended function as low-stress cycling routes. Over 40 percent of intersections lacked both greenways and calming features, creating a natural baseline group. 
+
+![**Figure 3:** Crash counts by infrastructure grouping, comparing all crashes with bicycle- and pedestrian-involved crashes.](figures/infra-grouping.png)
+
+### Crash Rates by Infrastructure and Traffic Volume  
+
+To account for differences in traffic exposure, we calculated crash rates per intersection across combined infrastructure groupings (greenways and calming features) and stratified by traffic volume tertiles (low, medium, high). As shown in Figure 4, crash rates were highest in high-volume areas, regardless of infrastructure presence. However, intersections with calming features—particularly when paired with greenways—had lower crash rates than those lacking interventions or with greenways alone within this high-volume group.  
+
+In medium- and low-volume areas, crash rates were substantially lower overall, with only minor differences between infrastructure types. This suggests that infrastructure interventions may have the greatest impact where traffic volumes, and therefore exposure risk, are highest.  
+
+![**Figure 4:** Bicycle- and pedestrian-involved crash rates per intersection by infrastructure grouping and traffic volume tertile.](figures/volume-crash.png)
+
+### Speed Environment  
+
+Analysis of posted speed limits revealed clear differences between street types. As shown in Figure 5, greenways consistently align with lower posted speed limits, while regular streets display a broader range of speed environments. Crashes resulting in severe outcomes were concentrated at higher speed limits, underscoring the relationship between speed and injury severity.  
+
+![**Figure 5:** Posted speed limits by street type and crash severity.](figures/speed-boxplot.png)
+
+### Spatial Patterns  
+
+Mapping bicycle- and pedestrian-involved crashes alongside Portland’s greenway network and traffic calming features provided a citywide view of crash concentrations and infrastructure coverage (Figure 6).  
+
+<iframe src="figures/spatial-map.html" width="100%" height="600px" style="border:none;"></iframe>
+
+**Figure 6:** Interactive map of bicycle- and pedestrian-involved crashes, greenways, and traffic calming features.
+
+
+These exploratory findings informed our subsequent modeling strategy by highlighting key relationships between crash rates, infrastructure presence, traffic exposure, and speed environments at the intersection level. By integrating these variables into our schema and validating them through EDA, we established a foundation for statistical modeling aimed at quantifying their combined effects on bicycle- and pedestrian-involved crash risk.
+
+## Feature Importance Analysis
+
+In order to better understand the relationship between the relevant features and bicycle/pededstrian safety, we propose the exploration of classification models that classify the injury risk of crashes. We will then examine the features that are most predictive of injury risk. Predictive power/classification accuracy is not the focus of this study, but it does provide insight into how strong the relationships between variables are. 
+
+### Logistic Regression
+
+#### Injury vs. No Injury
+To begin, we will explore a logistic regression model that predicts the binary variable `injured`, indicating whether or not one was injured in a crash. We start with all of the available observations and include those predictors which we believe potentially have a significant impact on the severity of the crash, as measured by whether or not someone was injured in the crash. These predictors are the speed limit, whether or not a bike lane was present, the sum of traffic calming devices like speed bumps, the presence of other infrastructural features like neighborhood greenways and buffered bike lanes, and the sum of watts per intersections as a measure of street lighting.
+
+The target variable proves to be balanced, with 49,649 observations uninjured, and 45,192 observations injured. First, an 80/20 train-test split is completed, and any categorical columns are converted to dummy variables. To prevent multicollinearity in the data, one column per categorical predictor is removed. Once this is done, we check the Variance Inflation Factor (VIF) in order to further analyze collinearity in the data. Subsequently, the logistic regression model is trained on the training data, and evaluated on the test data for generalization. 
+
+This procedure is recycled with slight variations for the rest of the models in this section. We will now explore other methods and procedures that provide insight into crash safety below.
+
+#### Fatal vs Non Fatal
+Understanding the features that contribute to fatal vs non fatal car crashes is important for understanding crash severity. The same procedure is completed for this analysis as the previous one, however one significant difference that affects the power of the model is class imbalance. Only 373 observations were fatal compared to 94,468 that were not fatal. 
+
+#### Bike/Pedestrian Granularity
+By using all of the data in the `crashes` dataset, we are able to conduct a high-level analysis of which features most contribute to crash injury/fatality. However, this tells us little about the relationship between infrastructure features and bike/pedestrian crashes in particular. The class imbalance for fatal crashes is even more extreme for bicycle and pedestrian crashes. It is also more extreme for injury-- Most bike or pedestrian crashes involve an injury as well, and few are property damage only.
+
+However, one aspect we can examine is the degree to which one is injured. The variable `highest_inj_svrty_desc` describes the highest injury severity of the crash, and takes the form of one of five categories: No Apparent Injury/PDO Crash, Possible Injury Crash, Suspected Minor Injury Crash, Suspected Serious Injury, and Fatal Injury. Based on the distribution of these classes, [REFER TO FIGURE] we can create a binary target variable with which we can classify minor injuries versus major injuries/fatalities, and thus explore the question of which features make a difference in the degree of injury severity.
+
+#### Regularization
+One way we can also analyze variable importance is through regularization techniques in our linear models. The LASSO method sets the least important coefficients to zero, and the Ridge regression method shrinks them. Here we include other variables into the models as well to see how LASSO/Ridge selects for them.
+
+### Random Forests
+Random forests are also useful for analyzing feature importance in a model. Trees will ignore irrelevant features. All of the above methods can be compared to see which features may be most predictive of crash safety. In the subsequent section, we will examine the results of each of these models.
+
