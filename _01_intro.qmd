@@ -1,1 +1,11 @@
 # Introduction
+
+Cities across the United States are investing in infrastructure to support safer, more sustainable modes of transportation. As communities seek to reduce traffic-related injuries, lower emissions, and encourage active lifestyles, the design of streets for non-motorized users has become a central focus of urban planning.
+
+Portland, Oregon has long been considered a national leader in bike-friendly infrastructure. Over the past two decades, the city has expanded its network of neighborhood greenways, added traffic calming elements, and prioritized improvements for pedestrians and cyclists. These efforts aim to slow vehicle speeds, discourage cut-through traffic, and make walking and biking safer and more appealing for everyday use.
+
+With roughly 6 percent of commuters traveling by bicycle and a Walk Score of 76, Portland continues to foster one of the strongest active transportation cultures in the country [@PBOTBikeModeShare; @WalkScorePortland]. The city has also adopted a Vision Zero policy to eliminate traffic deaths and serious injuries [@PBOTVisionZero]. Despite these investments, crashes involving cyclists and pedestrians remain a pressing concern- especially at intersections where cars, bikes, and people on foot converge.
+
+This project investigates whether neighborhood greenways, traffic calming features, spped limits, and street lighting are associated with reduced crash frequency or severity for cyclists and pedestrians in Portland. Using crash data from 2007 to 2022 alongside infrastructure inventories, we examine the relationship between street-level design and safety outcomes.
+
+By analyzing these patterns, we aim to provide insights that support evidence-based planning and help Portland assess the impact of its infrastructure investments on vulnerable road users.

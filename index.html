@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Portland Greenways and Intersection Safety</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-1c59215f878e034bd7426c637fa661ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+
+
+<meta name="citation_title" content="Portland Greenways and Intersection Safety">
+<meta name="citation_author" content="Noelle Matthews">
+<meta name="citation_author" content="Thomas Sato">
+<meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=Vision zero action plan: 2023 update;,citation_author=Portland Bureau of Transportation;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://www.portland.gov/sites/default/files/2023/vision-zero-action-plan-update-2023.pdf;">
+<meta name="citation_reference" content="citation_title=Portland, OR walk score;,citation_author=Walk Score;,citation_publication_date=2025;,citation_cover_date=2025;,citation_year=2025;,citation_fulltext_html_url=https://www.walkscore.com/OR/Portland;">
+<meta name="citation_reference" content="citation_title=Vision zero action plan: 2023 update;,citation_author=Portland Bureau of Transportation;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://www.portland.gov/sites/default/files/2023/vision-zero-action-plan-update-2023.pdf;">
+<meta name="citation_reference" content="citation_title=Portland’s neighborhood greenways;,citation_author=Portland Bureau of Transportation;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://www.portland.gov/transportation/greenways;">
+<meta name="citation_reference" content="citation_title=Vision zero: Crash data and trends;,citation_author=Portland Bureau of Transportation;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://www.portland.gov/transportation/vision-zero/crash-data;">
+<meta name="citation_reference" content="citation_title=The impact of transportation infrastructure on bicycling injuries and crashes: A review of the literature;,citation_author=Conor C. Reynolds;,citation_author=M. Anne Harris;,citation_author=Kay Teschke;,citation_author=Peter A. Cripton;,citation_author=Meghan Winters;,citation_publication_date=2009;,citation_cover_date=2009;,citation_year=2009;,citation_issue=47;,citation_doi=10.1186/1476-069X-8-47;,citation_volume=8;,citation_journal_title=Environmental Health;">
+<meta name="citation_reference" content="citation_title=Risk of injury for bicycling on cycle tracks versus in the street;,citation_author=Anne C. Lusk;,citation_author=Peter G. Furth;,citation_author=Patrick Morency;,citation_author=Luis F. Miranda-Moreno;,citation_author=Walter C. Willett;,citation_author=Jack T. Dennerlein;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;,citation_issue=2;,citation_doi=10.1136/ip.2010.028696;,citation_volume=17;,citation_journal_title=Injury Prevention;">
+<meta name="citation_reference" content="citation_title=Bicycle and pedestrian infrastructure evaluation report;,citation_author=Oregon Department of Transportation;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://www.oregon.gov/odot/Programs/Documents/BikePed-Infrastructure-Evaluation.pdf;">
+</head>
+
+<body class="quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Portland Greenways and Intersection Safety</h1>
+            <p class="subtitle lead">Exploring the Relationship Between Calming Infrastructure and Bike and Pedestrian Crash Risk</p>
+          </div>
+
+    
+    <div class="quarto-title-meta-container">
+      <div class="quarto-title-meta-column-start">
+        
+        <div class="quarto-title-meta">
+
+                <div>
+            <div class="quarto-title-meta-heading">Authors</div>
+            <div class="quarto-title-meta-contents">
+                        <p>Noelle Matthews </p>
+                        <p>Thomas Sato </p>
+                      </div>
+          </div>
+                
+          
+                
+              </div>
+      </div>
+      <div class="quarto-title-meta-column-end quarto-other-formats-target">
+      </div>
+    </div>
+
+
+
+    <div class="quarto-other-links-text-target">
+    </div>  </div>
+</header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#data-data-engineering" id="toc-data-data-engineering" class="nav-link" data-scroll-target="#data-data-engineering">Data &amp; Data Engineering</a>
+  <ul class="collapse">
+  <li><a href="#crash-data-crashes" id="toc-crash-data-crashes" class="nav-link" data-scroll-target="#crash-data-crashes">Crash Data (<code>crashes</code>)</a></li>
+  <li><a href="#bicycle-infrastructure-network" id="toc-bicycle-infrastructure-network" class="nav-link" data-scroll-target="#bicycle-infrastructure-network">Bicycle Infrastructure (<code>network</code>)</a></li>
+  <li><a href="#street-lighting-slights" id="toc-street-lighting-slights" class="nav-link" data-scroll-target="#street-lighting-slights">Street Lighting (<code>slights</code>)</a></li>
+  <li><a href="#traffic-calming-features-calming" id="toc-traffic-calming-features-calming" class="nav-link" data-scroll-target="#traffic-calming-features-calming">Traffic Calming Features (<code>calming</code>)</a></li>
+  <li><a href="#traffic-volume-vcounts" id="toc-traffic-volume-vcounts" class="nav-link" data-scroll-target="#traffic-volume-vcounts">Traffic Volume (<code>vcounts</code>)</a></li>
+  <li><a href="#speed-limits-slimits" id="toc-speed-limits-slimits" class="nav-link" data-scroll-target="#speed-limits-slimits">Speed Limits (<code>slimits</code>)</a></li>
+  <li><a href="#intersections-intrsct" id="toc-intersections-intrsct" class="nav-link" data-scroll-target="#intersections-intrsct">Intersections (<code>intrsct</code>)</a></li>
+  <li><a href="#population-population" id="toc-population-population" class="nav-link" data-scroll-target="#population-population">Population (<code>population</code>)</a></li>
+  <li><a href="#excluded-data" id="toc-excluded-data" class="nav-link" data-scroll-target="#excluded-data">Excluded Data</a></li>
+  <li><a href="#schema-normalization" id="toc-schema-normalization" class="nav-link" data-scroll-target="#schema-normalization">Schema Normalization</a></li>
+  </ul></li>
+  <li><a href="#data-engineering-and-exploration" id="toc-data-engineering-and-exploration" class="nav-link" data-scroll-target="#data-engineering-and-exploration">Data Engineering and Exploration</a>
+  <ul class="collapse">
+  <li><a href="#data-engineering-workflow" id="toc-data-engineering-workflow" class="nav-link" data-scroll-target="#data-engineering-workflow">Data Engineering Workflow</a>
+  <ul class="collapse">
+  <li><a href="#data-acquisition-and-cleaning" id="toc-data-acquisition-and-cleaning" class="nav-link" data-scroll-target="#data-acquisition-and-cleaning">Data Acquisition and Cleaning</a></li>
+  <li><a href="#schema-normalization-1" id="toc-schema-normalization-1" class="nav-link" data-scroll-target="#schema-normalization-1">Schema Normalization</a></li>
+  <li><a href="#feature-engineering" id="toc-feature-engineering" class="nav-link" data-scroll-target="#feature-engineering">Feature Engineering</a></li>
+  <li><a href="#data-validation" id="toc-data-validation" class="nav-link" data-scroll-target="#data-validation">Data Validation</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a>
+  <ul class="collapse">
+  <li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</a>
+  <ul class="collapse">
+  <li><a href="#crash-trends-and-severity" id="toc-crash-trends-and-severity" class="nav-link" data-scroll-target="#crash-trends-and-severity">Crash Trends and Severity</a></li>
+  <li><a href="#infrastructure-coverage-and-grouping" id="toc-infrastructure-coverage-and-grouping" class="nav-link" data-scroll-target="#infrastructure-coverage-and-grouping">Infrastructure Coverage and Grouping</a></li>
+  <li><a href="#crash-rates-by-infrastructure-and-traffic-volume" id="toc-crash-rates-by-infrastructure-and-traffic-volume" class="nav-link" data-scroll-target="#crash-rates-by-infrastructure-and-traffic-volume">Crash Rates by Infrastructure and Traffic Volume</a></li>
+  <li><a href="#speed-environment" id="toc-speed-environment" class="nav-link" data-scroll-target="#speed-environment">Speed Environment</a></li>
+  <li><a href="#spatial-patterns" id="toc-spatial-patterns" class="nav-link" data-scroll-target="#spatial-patterns">Spatial Patterns</a></li>
+  </ul></li>
+  <li><a href="#feature-importance-analysis" id="toc-feature-importance-analysis" class="nav-link" data-scroll-target="#feature-importance-analysis">Feature Importance Analysis</a>
+  <ul class="collapse">
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  <li><a href="#random-forests" id="toc-random-forests" class="nav-link" data-scroll-target="#random-forests">Random Forests</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+  
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Cities across the United States are investing in infrastructure to support safer, more sustainable modes of transportation. As communities seek to reduce traffic-related injuries, lower emissions, and encourage active lifestyles, the design of streets for non-motorized users has become a central focus of urban planning.</p>
+<p>Portland, Oregon has long been considered a national leader in bike-friendly infrastructure. Over the past two decades, the city has expanded its network of neighborhood greenways, added traffic calming elements, and prioritized improvements for pedestrians and cyclists. These efforts aim to slow vehicle speeds, discourage cut-through traffic, and make walking and biking safer and more appealing for everyday use.</p>
+<p>With roughly 6 percent of commuters traveling by bicycle and a Walk Score of 76, Portland continues to foster one of the strongest active transportation cultures in the country <span class="citation" data-cites="PBOTBikeModeShare WalkScorePortland">(<a href="#ref-PBOTBikeModeShare" role="doc-biblioref">Portland Bureau of Transportation 2023b</a>; <a href="#ref-WalkScorePortland" role="doc-biblioref">Walk Score 2025</a>)</span>. The city has also adopted a Vision Zero policy to eliminate traffic deaths and serious injuries <span class="citation" data-cites="PBOTVisionZero">(<a href="#ref-PBOTVisionZero" role="doc-biblioref">Portland Bureau of Transportation 2023c</a>)</span>. Despite these investments, crashes involving cyclists and pedestrians remain a pressing concern- especially at intersections where cars, bikes, and people on foot converge.</p>
+<p>This project investigates whether neighborhood greenways, traffic calming features, spped limits, and street lighting are associated with reduced crash frequency or severity for cyclists and pedestrians in Portland. Using crash data from 2007 to 2022 alongside infrastructure inventories, we examine the relationship between street-level design and safety outcomes.</p>
+<p>By analyzing these patterns, we aim to provide insights that support evidence-based planning and help Portland assess the impact of its infrastructure investments on vulnerable road users.</p>
+</section>
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>Efforts to improve street safety for pedestrians and cyclists increasingly focus on the role of infrastructure design. While the addition of bicycle lanes, pedestrian crossings, and traffic calming features has become common practice in urban transportation planning, the effectiveness of such interventions depends on a range of contextual factors, including implementation quality, spatial placement, and surrounding traffic conditions.</p>
+<p>In Portland, Oregon, neighborhood greenways are a key component of the city’s active transportation network. These low-traffic, residential streets are intended to reduce vehicle volumes and speeds, thereby creating a safer and more comfortable environment for non-motorized users. Typical design elements include speed bumps, traffic diverters, wayfinding signage, and enhanced crossings. More broadly, traffic calming measures (such as raised crosswalks, curb extensions, and median islands) aim to moderate driver behavior and improve visibility at critical points in the street network.</p>
+<p>Since the early 2000s, the Portland Bureau of Transportation (PBOT) has expanded its network of greenways to more than 100 miles throughout the city <span class="citation" data-cites="PBOTGreenways">(<a href="#ref-PBOTGreenways" role="doc-biblioref">Portland Bureau of Transportation 2023a</a>)</span>. These efforts are integrated into broader policy initiatives, including the Vision Zero Action Plan and Safe Routes to School, which prioritize equity and the reduction of traffic-related fatalities and injuries. As part of this strategy, PBOT has also invested in targeted improvements at intersections identified as high-risk based on historical crash data <span class="citation" data-cites="PBOTCrashStats">(<a href="#ref-PBOTCrashStats" role="doc-biblioref">Portland Bureau of Transportation 2023d</a>)</span>.</p>
+<p>Intersections represent a particularly hazardous component of the transportation system. Unlike midblock segments, intersections concentrate multimodal activity and conflicting movements, increasing the likelihood of collisions. A disproportionate share of serious pedestrian- and cyclist-involved crashes in Portland occurs at intersections, reinforcing the importance of evaluating safety outcomes in these locations.</p>
+<p>Existing research on the safety impacts of active transportation infrastructure has produced mixed findings. While several studies report that protected bike lanes, lighting, and calming features are associated with reduced crash frequency and severity <span class="citation" data-cites="Reynolds2009 Lusk2011">(<a href="#ref-Reynolds2009" role="doc-biblioref">Reynolds et al. 2009</a>; <a href="#ref-Lusk2011" role="doc-biblioref">Lusk et al. 2011</a>)</span>, others emphasize the role of broader contextual variables, such as traffic volume, land use, and roadway design <span class="citation" data-cites="ODOTInfrastructure">(<a href="#ref-ODOTInfrastructure" role="doc-biblioref">Oregon Department of Transportation 2022</a>)</span>. Moreover, empirical analysis is often limited by inconsistent definitions of infrastructure types, limited geographic specificity, and challenges in isolating the effects of individual treatments.</p>
+<p>This study contributes to the literature by leveraging a unified, intersection-level dataset that captures both crash outcomes and multiple categories of infrastructure features in Portland from 2007 to 2022. By focusing on neighborhood greenways, traffic calming treatments, and street lighting, we seek to evaluate whether these design interventions are associated with measurable improvements in safety for vulnerable road users.</p>
+</section>
+<section id="data-data-engineering" class="level1">
+<h1>Data &amp; Data Engineering</h1>
+<p>This project uses a variety of spatial and tabular datasets from public sources, including the Oregon Department of Transportation (ODOT), the Portland Bureau of Transportation (PBOT), and Oregon’s GEOHub. Our analysis focuses on intersection-level crash patterns from 2007 to 2022 and incorporates information on infrastructure, lighting, traffic volumes, and speed limits.</p>
+<p>To ensure we were leveraging all available data sources and interpreting them appropriately, we conducted early meetings with members of the City of Portland’s Vision Zero team and a senior transportation planner at Parametrix specializing in active transportation and safety. These conversations informed our understanding of where relevant infrastructure data was stored, how various features were used in practice, and which fields could support reliable spatial joins. We discussed common limitations in existing datasets, including inconsistent naming conventions, missing coordinates, and duplicate infrastructure records; and received guidance on which types of infrastructure were most relevant to current safety planning efforts. These meetings also shaped our decision to normalize the schema around a master <code>intrsct</code> table and directly influenced how we defined feature categories such as neighborhood greenways, traffic calming, and lighting coverage.</p>
+<p>We created a fully normalized PostgreSQL database structured around the <code>intrsct</code> table. All other datasets were cleaned, filtered, and joined to this central reference using either shared intersection identifiers or approximate spatial joins based on latitude and longitude. This structure enabled consistent and flexible querying by location and allowed us to integrate diverse datasets into a unified schema (see Figure 1).</p>
+<section id="crash-data-crashes" class="level3">
+<h3 class="anchored" data-anchor-id="crash-data-crashes">Crash Data (<code>crashes</code>)</h3>
+<p>The core of our analysis is built on over 350,000 crash records from ODOT. We filtered this dataset to include only bicycle- and pedestrian-involved crashes and dropped entries with missing or invalid coordinates. Street names were standardized to ensure alignment during joins, and each crash was assigned an <code>intersection_id</code> based on matches to the <code>intrsct</code> table. The crashes table contains fields such as crash date (<code>crash_dt</code>), severity (<code>crash_svrty_long_desc</code>), highest injury severity (<code>highest_inj_svrty_desc</code>), and participant counts (<code>tot_pedcycl_cnt</code>, <code>tot_ped_cnt</code>).</p>
+</section>
+<section id="bicycle-infrastructure-network" class="level3">
+<h3 class="anchored" data-anchor-id="bicycle-infrastructure-network">Bicycle Infrastructure (<code>network</code>)</h3>
+<p>The <code>network</code> table, derived from PBOT’s bicycle network dataset, catalogs bicycle infrastructure such as neighborhood greenways, bike lanes, and multi-use paths. Fields include facility type (<code>facility</code>) and installation year (<code>year_built</code>). Records were standardized and spatially joined to nearby intersections in <code>intrsct</code> to enable intersection-level comparisons of infrastructure and crash outcomes.</p>
+</section>
+<section id="street-lighting-slights" class="level3">
+<h3 class="anchored" data-anchor-id="street-lighting-slights">Street Lighting (<code>slights</code>)</h3>
+<p>The slights table contains point-level records of streetlights with attributes including wattage (<code>watts</code>) and lumen output (<code>lumen</code>). We transformed coordinates to WGS 84 and joined each light to its nearest intersection in <code>intrsct</code>. Aggregated fields, such as total wattage and light count per intersection, serve as proxies for illumination coverage.</p>
+</section>
+<section id="traffic-calming-features-calming" class="level3">
+<h3 class="anchored" data-anchor-id="traffic-calming-features-calming">Traffic Calming Features (<code>calming</code>)</h3>
+<p>The calming table documents features such as speed humps, raised crosswalks, and curb extensions. Each record includes a feature type (<code>feature_type</code>) and coordinates, which were spatially joined to <code>intrsct</code> to create intersection-level calming indicators.</p>
+</section>
+<section id="traffic-volume-vcounts" class="level3">
+<h3 class="anchored" data-anchor-id="traffic-volume-vcounts">Traffic Volume (<code>vcounts</code>)</h3>
+<p>The <code>vcounts</code> table contains vehicle counts by intersection, including AM and PM peak (<code>am_volume</code>, <code>pm_volume</code>) and average daily traffic counts (<code>avg_daily_traffic</code>). These data help control for traffic exposure in our later modeling and provide contextual insights into crash density relative to traffic flow.</p>
+</section>
+<section id="speed-limits-slimits" class="level3">
+<h3 class="anchored" data-anchor-id="speed-limits-slimits">Speed Limits (<code>slimits</code>)</h3>
+<p>Initially excluded due to incomplete identifiers, the speed limit dataset was later processed and integrated. We used proximity-based spatial joins to assign speed limits (<code>speed_limit</code>) to intersections in <code>intrsct</code>. This variable supports analysis of posted speed environments in relation to crash severity and frequency.</p>
+</section>
+<section id="intersections-intrsct" class="level3">
+<h3 class="anchored" data-anchor-id="intersections-intrsct">Intersections (<code>intrsct</code>)</h3>
+<p>The <code>intrsct</code> table serves as the schema’s hub, generated using the <code>osmnx</code> Python package and OpenStreetMap data. Each record includes an <code>intersection_id</code>, intersecting street names (<code>from_street</code>, <code>to_street</code>), and geographic coordinates. All other tables are joined to this central reference via <code>intersection_id</code>.</p>
+</section>
+<section id="population-population" class="level3">
+<h3 class="anchored" data-anchor-id="population-population">Population (<code>population</code>)</h3>
+<p>We also incorporated a <code>population</code> table containing annual citywide population estimates. While it does not connect directly to the intersection-level schema, it supports per capita crash rate calculations and provides demographic context for interpreting trends in active transportation safety.</p>
+</section>
+<section id="excluded-data" class="level3">
+<h3 class="anchored" data-anchor-id="excluded-data">Excluded Data</h3>
+<p>While initially considered, we excluded the <code>recommended_bicycle_routes</code> dataset after determining that it duplicated information available in the bicycle network layer and lacked the detail needed for meaningful comparison. The data could not be confidently joined and was unlikely to add new explanatory power to our analysis. Proxies for risk, such as crash severity, lighting, and calming infrastructure, were already present in our model.</p>
+</section>
+<section id="schema-normalization" class="level3">
+<h3 class="anchored" data-anchor-id="schema-normalization">Schema Normalization</h3>
+<p>All datasets were aligned to WGS 84 and cleaned to support accurate joining. Each resulting table contains only the fields necessary for analysis and follows consistent naming conventions. Each record- whether a crash, street light, or calming feature, can now be attributed to a specific intersection. This enables comparison of safety outcomes based on local infrastructure conditions and supports analysis at the intersection level.</p>
+<p>Figure 1 below illustrates the final database schema, which is normalized around a central intersections table and joined to cleaned infrastructure datasets using shared intersection IDs or spatial proximity.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figures/schema.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure 1: ER diagram of the created tables and their relationships."><img src="figures/schema.png" class="img-fluid figure-img" alt="Figure 1: ER diagram of the created tables and their relationships."></a></p>
+<figcaption>Figure 1: ER diagram of the created tables and their relationships.</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="data-engineering-and-exploration" class="level1">
+<h1>Data Engineering and Exploration</h1>
+<p>Building this database required extensive preprocessing and integration across multiple spatial and tabular datasets. These steps were essential to ensure accurate intersection-level joins and to support subsequent exploratory analyses and modeling.</p>
+<section id="data-engineering-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="data-engineering-workflow">Data Engineering Workflow</h2>
+<section id="data-acquisition-and-cleaning" class="level3">
+<h3 class="anchored" data-anchor-id="data-acquisition-and-cleaning">Data Acquisition and Cleaning</h3>
+<p>We obtained data from the Oregon Department of Transportation (ODOT), the Portland Bureau of Transportation (PBOT), and Oregon GEOHub in their original formats, including CSV files, shapefiles, and API outputs. Cleaning steps focused on aligning datasets both geographically and structurally. Crashes were filtered to include only those within Portland city limits and non-highway segments. Records with null or invalid coordinates, such as those present in the <code>crashes</code> and <code>slimits</code> tables, were removed. Street names were standardized across <code>crashes</code>, <code>network</code>, and <code>calming</code> to ensure join consistency. Categorical fields, such as traffic calming feature codes, were encoded uniformly, and naming inconsistencies (e.g., <code>WAY</code> versus <code>WY</code>) were corrected. For crashes without an initial intersection match, we used nearest-neighbor joins to impute <code>intersection_id</code> assignments, validating the resulting joins through interactive mapping. These processes reduced the crashes dataset from 356,280 metro-area records to 94,841 Portland-specific records suitable for integration with infrastructure layers.</p>
+</section>
+<section id="schema-normalization-1" class="level3">
+<h3 class="anchored" data-anchor-id="schema-normalization-1">Schema Normalization</h3>
+<p>To integrate these datasets, we implemented a hub-and-spoke relational schema anchored by the <code>intrsct</code> table, a deduplicated intersections dataset generated using the <code>osmnx</code> package. All supporting tables—including <code>crashes</code>, <code>network</code>, <code>slights</code>, <code>calming</code>, <code>vcounts</code>, and <code>slimits</code>—were linked to <code>intrsct</code> via <code>intersection_id</code>, either directly or through proximity-based spatial joins. This approach allowed for scalable, reproducible analysis at the intersection level and supported efficient feature aggregation (Figure 1).</p>
+</section>
+<section id="feature-engineering" class="level3">
+<h3 class="anchored" data-anchor-id="feature-engineering">Feature Engineering</h3>
+<p>We derived several intersection-level variables to capture infrastructure and environmental context. Lighting characteristics were aggregated from the <code>slights</code> table, including counts of streetlights and total wattage, to serve as proxies for illumination. Traffic calming features, such as speed bumps, raised crosswalks, textured crosswalks, and rumble strips, were encoded as binary indicators from the <code>calming</code> table. Bicycle infrastructure was mapped using the <code>network</code> dataset, including the presence of neighborhood greenways and bike lanes, along with installation years to support pre- and post-installation comparisons. Speed environments were characterized by assigning posted speed limits from the <code>slimits</code> table via proximity-based joins. Traffic exposure was controlled through average daily traffic (ADT) data from <code>vcounts</code>. Additionally, crash severity was collapsed into an ordinal structure encompassing fatal, injury, and property-damage-only categories. Annual population estimates were included separately to provide per-capita context for citywide crash trends, although they were not directly tied to intersection-level records.</p>
+</section>
+<section id="data-validation" class="level3">
+<h3 class="anchored" data-anchor-id="data-validation">Data Validation</h3>
+<p>Validation procedures confirmed the uniqueness of <code>intersection_id</code> values within the <code>intrsct</code> table and quantified the rate of unmatched joins. Approximately 25 percent of filtered crashes initially lacked an intersection match; these were reassigned using spatial proximity within a 100-meter buffer, with results verified through visual inspection in Leaflet. These steps ensured a robust, geographically coherent database suitable for subsequent exploratory analysis and modeling.</p>
+</section>
+</section>
+</section>
+<section id="analysis" class="level1">
+<h1>Analysis</h1>
+<section id="exploratory-data-analysis-eda" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</h2>
+<section id="crash-trends-and-severity" class="level3">
+<h3 class="anchored" data-anchor-id="crash-trends-and-severity">Crash Trends and Severity</h3>
+<p>As shown in Figure 2a, annual crash counts were relatively stable with a moderate decline during 2019–2021 (COVID-19 pandemic), while bicycle- and pedestrian-involved crashes remained a small but persistent share of all crashes.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figures/crash-trends.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure 2a: Annual crash counts comparing all crashes with those involving bicycles or pedestrians."><img src="figures/crash-trends.png" class="img-fluid figure-img" alt="Figure 2a: Annual crash counts comparing all crashes with those involving bicycles or pedestrians."></a></p>
+<figcaption><strong>Figure 2a:</strong> Annual crash counts comparing all crashes with those involving bicycles or pedestrians.</figcaption>
+</figure>
+</div>
+<p>Similarly, Figure 2b illustrates the distribution of injury severity levels for all crashes compared to those involving bicycles or pedestrians.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figures/severity-dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure 2b: Distribution of injury severity levels comparing all crashes with bicycle and pedestrian-involved crashes."><img src="figures/severity-dist.png" class="img-fluid figure-img" alt="Figure 2b: Distribution of injury severity levels comparing all crashes with bicycle and pedestrian-involved crashes."></a></p>
+<figcaption><strong>Figure 2b:</strong> Distribution of injury severity levels comparing all crashes with bicycle and pedestrian-involved crashes.</figcaption>
+</figure>
+</div>
+</section>
+<section id="infrastructure-coverage-and-grouping" class="level3">
+<h3 class="anchored" data-anchor-id="infrastructure-coverage-and-grouping">Infrastructure Coverage and Grouping</h3>
+<p>Neighborhood greenways are distributed across Portland, spanning both east and west sides of the city. While coverage is denser in areas with a connected street grid, they are not limited to any single quadrant. Traffic calming features were often co-located with greenways, reinforcing their intended function as low-stress cycling routes. Over 40 percent of intersections lacked both greenways and calming features, creating a natural baseline group.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figures/infra-grouping.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure 3: Crash counts by infrastructure grouping, comparing all crashes with bicycle- and pedestrian-involved crashes."><img src="figures/infra-grouping.png" class="img-fluid figure-img" alt="Figure 3: Crash counts by infrastructure grouping, comparing all crashes with bicycle- and pedestrian-involved crashes."></a></p>
+<figcaption><strong>Figure 3:</strong> Crash counts by infrastructure grouping, comparing all crashes with bicycle- and pedestrian-involved crashes.</figcaption>
+</figure>
+</div>
+</section>
+<section id="crash-rates-by-infrastructure-and-traffic-volume" class="level3">
+<h3 class="anchored" data-anchor-id="crash-rates-by-infrastructure-and-traffic-volume">Crash Rates by Infrastructure and Traffic Volume</h3>
+<p>To account for differences in traffic exposure, we calculated crash rates per intersection across combined infrastructure groupings (greenways and calming features) and stratified by traffic volume tertiles (low, medium, high). As shown in Figure 4, crash rates were highest in high-volume areas, regardless of infrastructure presence. However, intersections with calming features—particularly when paired with greenways—had lower crash rates than those lacking interventions or with greenways alone within this high-volume group.</p>
+<p>In medium- and low-volume areas, crash rates were substantially lower overall, with only minor differences between infrastructure types. This suggests that infrastructure interventions may have the greatest impact where traffic volumes, and therefore exposure risk, are highest.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figures/volume-crash.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure 4: Bicycle- and pedestrian-involved crash rates per intersection by infrastructure grouping and traffic volume tertile."><img src="figures/volume-crash.png" class="img-fluid figure-img" alt="Figure 4: Bicycle- and pedestrian-involved crash rates per intersection by infrastructure grouping and traffic volume tertile."></a></p>
+<figcaption><strong>Figure 4:</strong> Bicycle- and pedestrian-involved crash rates per intersection by infrastructure grouping and traffic volume tertile.</figcaption>
+</figure>
+</div>
+</section>
+<section id="speed-environment" class="level3">
+<h3 class="anchored" data-anchor-id="speed-environment">Speed Environment</h3>
+<p>Analysis of posted speed limits revealed clear differences between street types. As shown in Figure 5, greenways consistently align with lower posted speed limits, while regular streets display a broader range of speed environments. Crashes resulting in severe outcomes were concentrated at higher speed limits, underscoring the relationship between speed and injury severity.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figures/speed-boxplot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure 5: Posted speed limits by street type and crash severity."><img src="figures/speed-boxplot.png" class="img-fluid figure-img" alt="Figure 5: Posted speed limits by street type and crash severity."></a></p>
+<figcaption><strong>Figure 5:</strong> Posted speed limits by street type and crash severity.</figcaption>
+</figure>
+</div>
+</section>
+<section id="spatial-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="spatial-patterns">Spatial Patterns</h3>
+<p>Mapping bicycle- and pedestrian-involved crashes alongside Portland’s greenway network and traffic calming features provided a citywide view of crash concentrations and infrastructure coverage (Figure 6).</p>
+<iframe src="figures/spatial-map.html" width="100%" height="600px" style="border:none;">
+</iframe>
+<p><strong>Figure 6:</strong> Interactive map of bicycle- and pedestrian-involved crashes, greenways, and traffic calming features.</p>
+<p>These exploratory findings informed our subsequent modeling strategy by highlighting key relationships between crash rates, infrastructure presence, traffic exposure, and speed environments at the intersection level. By integrating these variables into our schema and validating them through EDA, we established a foundation for statistical modeling aimed at quantifying their combined effects on bicycle- and pedestrian-involved crash risk.</p>
+</section>
+</section>
+<section id="feature-importance-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="feature-importance-analysis">Feature Importance Analysis</h2>
+<p>In order to better understand the relationship between the relevant features and bicycle/pededstrian safety, we propose the exploration of classification models that classify the injury risk of crashes. We will then examine the features that are most predictive of injury risk. Predictive power/classification accuracy is not the focus of this study, but it does provide insight into how strong the relationships between variables are.</p>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
+<section id="injury-vs.-no-injury" class="level4">
+<h4 class="anchored" data-anchor-id="injury-vs.-no-injury">Injury vs.&nbsp;No Injury</h4>
+<p>To begin, we will explore a logistic regression model that predicts the binary variable <code>injured</code>, indicating whether or not one was injured in a crash. We start with all of the available observations and include those predictors which we believe potentially have a significant impact on the severity of the crash, as measured by whether or not someone was injured in the crash. These predictors are the speed limit, whether or not a bike lane was present, the sum of traffic calming devices like speed bumps, the presence of other infrastructural features like neighborhood greenways and buffered bike lanes, and the sum of watts per intersections as a measure of street lighting.</p>
+<p>The target variable proves to be balanced, with 49,649 observations uninjured, and 45,192 observations injured. First, an 80/20 train-test split is completed, and any categorical columns are converted to dummy variables. To prevent multicollinearity in the data, one column per categorical predictor is removed. Once this is done, we check the Variance Inflation Factor (VIF) in order to further analyze collinearity in the data. Subsequently, the logistic regression model is trained on the training data, and evaluated on the test data for generalization.</p>
+<p>This procedure is recycled with slight variations for the rest of the models in this section. We will now explore other methods and procedures that provide insight into crash safety below.</p>
+</section>
+<section id="fatal-vs-non-fatal" class="level4">
+<h4 class="anchored" data-anchor-id="fatal-vs-non-fatal">Fatal vs Non Fatal</h4>
+<p>Understanding the features that contribute to fatal vs non fatal car crashes is important for understanding crash severity. The same procedure is completed for this analysis as the previous one, however one significant difference that affects the power of the model is class imbalance. Only 373 observations were fatal compared to 94,468 that were not fatal.</p>
+</section>
+<section id="bikepedestrian-granularity" class="level4">
+<h4 class="anchored" data-anchor-id="bikepedestrian-granularity">Bike/Pedestrian Granularity</h4>
+<p>By using all of the data in the <code>crashes</code> dataset, we are able to conduct a high-level analysis of which features most contribute to crash injury/fatality. However, this tells us little about the relationship between infrastructure features and bike/pedestrian crashes in particular. The class imbalance for fatal crashes is even more extreme for bicycle and pedestrian crashes. It is also more extreme for injury– Most bike or pedestrian crashes involve an injury as well, and few are property damage only.</p>
+<p>However, one aspect we can examine is the degree to which one is injured. The variable <code>highest_inj_svrty_desc</code> describes the highest injury severity of the crash, and takes the form of one of five categories: No Apparent Injury/PDO Crash, Possible Injury Crash, Suspected Minor Injury Crash, Suspected Serious Injury, and Fatal Injury. Based on the distribution of these classes, [REFER TO FIGURE] we can create a binary target variable with which we can classify minor injuries versus major injuries/fatalities, and thus explore the question of which features make a difference in the degree of injury severity.</p>
+</section>
+<section id="regularization" class="level4">
+<h4 class="anchored" data-anchor-id="regularization">Regularization</h4>
+<p>One way we can also analyze variable importance is through regularization techniques in our linear models. The LASSO method sets the least important coefficients to zero, and the Ridge regression method shrinks them. Here we include other variables into the models as well to see how LASSO/Ridge selects for them.</p>
+</section>
+</section>
+<section id="random-forests" class="level3">
+<h3 class="anchored" data-anchor-id="random-forests">Random Forests</h3>
+<p>Random forests are also useful for analyzing feature importance in a model. Trees will ignore irrelevant features. All of the above methods can be compared to see which features may be most predictive of crash safety. In the subsequent section, we will examine the results of each of these models.</p>
+</section>
+</section>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<p>We are examining many different types of models</p>
+</section>
+<section id="conclusions" class="level1">
+<h1>Conclusions</h1>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Lusk2011" class="csl-entry" role="listitem">
+Lusk, Anne C., Peter G. Furth, Patrick Morency, Luis F. Miranda-Moreno, Walter C. Willett, and Jack T. Dennerlein. 2011. <span>“Risk of Injury for Bicycling on Cycle Tracks Versus in the Street.”</span> <em>Injury Prevention</em> 17 (2): 131–35. <a href="https://doi.org/10.1136/ip.2010.028696">https://doi.org/10.1136/ip.2010.028696</a>.
+</div>
+<div id="ref-ODOTInfrastructure" class="csl-entry" role="listitem">
+Oregon Department of Transportation. 2022. <span>“Bicycle and Pedestrian Infrastructure Evaluation Report.”</span> <a href="https://www.oregon.gov/odot/Programs/Documents/BikePed-Infrastructure-Evaluation.pdf">https://www.oregon.gov/odot/Programs/Documents/BikePed-Infrastructure-Evaluation.pdf</a>.
+</div>
+<div id="ref-PBOTGreenways" class="csl-entry" role="listitem">
+Portland Bureau of Transportation. 2023a. <span>“Portland’s Neighborhood Greenways.”</span> <a href="https://www.portland.gov/transportation/greenways">https://www.portland.gov/transportation/greenways</a>.
+</div>
+<div id="ref-PBOTBikeModeShare" class="csl-entry" role="listitem">
+———. 2023b. <span>“Vision Zero Action Plan: 2023 Update.”</span> <a href="https://www.portland.gov/sites/default/files/2023/vision-zero-action-plan-update-2023.pdf">https://www.portland.gov/sites/default/files/2023/vision-zero-action-plan-update-2023.pdf</a>.
+</div>
+<div id="ref-PBOTVisionZero" class="csl-entry" role="listitem">
+———. 2023c. <span>“Vision Zero Action Plan: 2023 Update.”</span> <a href="https://www.portland.gov/sites/default/files/2023/vision-zero-action-plan-update-2023.pdf">https://www.portland.gov/sites/default/files/2023/vision-zero-action-plan-update-2023.pdf</a>.
+</div>
+<div id="ref-PBOTCrashStats" class="csl-entry" role="listitem">
+———. 2023d. <span>“Vision Zero: Crash Data and Trends.”</span> <a href="https://www.portland.gov/transportation/vision-zero/crash-data">https://www.portland.gov/transportation/vision-zero/crash-data</a>.
+</div>
+<div id="ref-Reynolds2009" class="csl-entry" role="listitem">
+Reynolds, Conor C., M. Anne Harris, Kay Teschke, Peter A. Cripton, and Meghan Winters. 2009. <span>“The Impact of Transportation Infrastructure on Bicycling Injuries and Crashes: A Review of the Literature.”</span> <em>Environmental Health</em> 8 (47): 1–19. <a href="https://doi.org/10.1186/1476-069X-8-47">https://doi.org/10.1186/1476-069X-8-47</a>.
+</div>
+<div id="ref-WalkScorePortland" class="csl-entry" role="listitem">
+Walk Score. 2025. <span>“Portland, OR Walk Score.”</span> <a href="https://www.walkscore.com/OR/Portland">https://www.walkscore.com/OR/Portland</a>.
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
