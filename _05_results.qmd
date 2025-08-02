@@ -1,10 +1,6 @@
 # Results
 
-We will display the results from the previously mentioned models in a table, as shown in the figure below. 
+This section presents the results of our classification models across combinations of crash types (all, bicycle-involved, pedestrian-involved), outcome variables (fatal, injury, major injury), predictor sets (all features, infrastructure-only), and modeling approaches (Logistic Regression, LASSO, Ridge, Random Forest). Our focus is on model interpretability, with an emphasis on feature importance rankings rather than predictive performance alone. Cohen’s Kappa is used as the primary evaluation metric due to class imbalance. For each modeling configuration, we report predictive agreement and the top three contributing features.
 
-```{r}
-library(knitr)
-library(readxl)
-kable(read_excel("modeling_results.xlsx"))
-```
+
 

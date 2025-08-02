@@ -1,0 +1,73 @@
+Data Subset,Model Type,Predictors Subset,Target Variable,Highest Importance,2nd Highest Importance,3rd Highest Importance,Min Kappa,Max Kappa,Min Accuracy,Max Accuracy,Min Sensitivity,Max Sensitivity,Min Specificity,Max Specificity,Kappa Range
+All,LASSO,All,Degree of Injury,Road Surface: Unknown,Road Surface: Ice,Drugs Involved,0.0086,0.0173,0.8476,0.8486,0.0069,0.0121,0.9976,0.9986,0.0087
+All,LASSO,All,Fatal vs Non-Fatal,Drugs Involved,Crash Speed Involved,Alcohol Involved,0.0715,0.1439,0.9958,0.9963,0.0405,0.0811,0.9995,0.9998,0.0724
+All,LASSO,All,Injured vs Non-Injured,Road Surface: Unknown,Road Surface: Ice,Drugs Involved,0.0984,0.109,0.5546,0.5603,0.4128,0.4233,0.6741,0.6895,0.0106
+All,LASSO,Infrastructural,Degree of Injury,NA,NA,NA,0,0,0.8481,0.8481,0,0,1,1,0
+All,LASSO,Infrastructural,Fatal vs Non-Fatal,NA,NA,NA,0,0,0.9961,0.9961,0,0,1,1,0
+All,LASSO,Infrastructural,Injured vs Non-Injured,Infrastructure Present,Bike Lane,Speed Limit,4.00E-04,0.0134,0.521,0.5256,0.0571,0.0992,0.9129,0.9433,0.013
+All,Logistic,All,Degree of Injury,Marijuana Involved,Alcohol Involved,Crash Speed Involved,0.0096,0.0176,0.8476,0.8485,0.0076,0.0121,0.9973,0.9984,0.008
+All,Logistic,All,Fatal vs Non-Fatal,Drugs Involved,Crash Speed Involved,Alcohol Involved,0.092,0.183,0.9959,0.9963,0.0541,0.1081,0.9996,0.9998,0.091
+All,Logistic,All,Injured vs Non-Injured,Marijuana Involved,Hit and Run,Speed Limit,0.1014,0.1099,0.5558,0.5605,0.4201,0.4327,0.6677,0.6842,0.0085
+All,Logistic,Infrastructural,Degree of Injury,Infrastructure Present,Total Watts,Bike Lane,0,0,0.8481,0.8481,0,0,1,1,0
+All,Logistic,Infrastructural,Fatal vs Non-Fatal,Sum Traffic Calming Devices,"Infrastructure Present, Speed Limit",Total Watts,0,0,0.9961,0.9961,0,0,1,1,0
+All,Logistic,Infrastructural,Injured vs Non-Injured,Speed Limit,Infrastructure Present,Bike Lane,0.0083,0.019,0.5218,0.5266,0.1255,0.1532,0.8605,0.8826,0.0107
+All,Random Forest,All,Degree of Injury,Total Watts,Crash Hour,Alcohol Involved,0.0083,0.0135,0.8475,0.8487,0.0062,0.009,0.9979,0.9994,0.0052
+All,Random Forest,All,Fatal vs Non-Fatal,Drugs Involved,Total Watts,Crash Hour,-1.00E-04,0,0.996,0.9961,0,0,0.9999,1,1.00E-04
+All,Random Forest,All,Injured vs Non-Injured,Crash Hour,Total Watts,Speed Limit,0.1001,0.1155,0.5587,0.5654,0.348,0.3904,0.7235,0.7504,0.0154
+All,Random Forest,Infrastructural,Degree of Injury,Total Watts,Speed Limit,Sum Traffic Calming Devices,0,0.0021,0.8477,0.8482,3.00E-04,0.0017,0.9994,0.9999,0.0021
+All,Random Forest,Infrastructural,Fatal vs Non-Fatal,Total Watts,Speed Limit,Bike Lane,0,0,0.9961,0.9961,0,0,1,1,0
+All,Random Forest,Infrastructural,Injured vs Non-Injured,Total Watts,Speed Limit,Sum Traffic Calming Devices,0.0527,0.068,0.5346,0.5425,0.3252,0.3424,0.7094,0.7304,0.0153
+All,Ridge,All,Degree of Injury,Road Surface: Unknown,Drugs Involved,"Drugs Involved, Road Surface: Ice",0.0085,0.0167,0.8475,0.8485,0.0069,0.0115,0.9976,0.9985,0.0082
+All,Ridge,All,Fatal vs Non-Fatal,Drugs Involved,Crash Speed Involved,Alcohol Involved,0.0481,0.1168,0.9959,0.9962,0.027,0.0676,0.9996,0.9998,0.0687
+All,Ridge,All,Injured vs Non-Injured,Road Surface: Unknown,Road Surface: Ice,Road Surface: Ice,0.0967,0.1088,0.5545,0.5602,0.4056,0.4239,0.6736,0.6902,0.0121
+All,Ridge,Infrastructural,Degree of Injury,Infrastructure Present,Bike Lane,Sum Traffic Calming Devices,0,0,0.8481,0.8481,0,0,1,1,0
+All,Ridge,Infrastructural,Fatal vs Non-Fatal,Sum Traffic Calming Devices,Infrastructure Present,Bike Lane,0,0,0.9961,0.9961,0,0,1,1,0
+All,Ridge,Infrastructural,Injured vs Non-Injured,Infrastructure Present,Bike Lane,Sum Traffic Calming Devices,0,0,0.5235,0.5235,0,0,1,1,0
+Bike,LASSO,All,Degree of Injury,Weather Condition: Snow,Road Surface: Ice,"Drugs Involved, Road Surface: Snow",0.0509,0.11,0.6403,0.6612,0.9463,0.9626,0.0909,0.1281,0.0591
+Bike,LASSO,All,Fatal vs Non-Fatal,Drugs Involved,Road Surface: Ice,Road Surface: Unknown,0,0.282,0.9925,0.994,0,0.25,0.997,1,0.282
+Bike,LASSO,All,Injured vs Non-Injured,NA,NA,NA,0,0,0.9762,0.9762,1,1,0,0,0
+Bike,LASSO,Infrastructural,Degree of Injury,NA,NA,NA,0,0,0.6388,0.6388,1,1,0,0,0
+Bike,LASSO,Infrastructural,Fatal vs Non-Fatal,NA,NA,NA,0,0,0.994,0.994,0,0,1,1,0
+Bike,LASSO,Infrastructural,Injured vs Non-Injured,NA,NA,NA,0,0,0.9762,0.9762,1,1,0,0,0
+Bike,Logistic,All,Degree of Injury,Marijuana Involved,Road Surface: Unknown,Drugs Involved,0.0509,0.107,0.6403,0.6597,0.9393,0.9626,0.0909,0.1281,0.0561
+Bike,Logistic,All,Fatal vs Non-Fatal,Drugs Involved,Crash Speed Involved,Hit and Run,0,0.6653,0.9925,0.997,0,0.5,0.997,1,0.6653
+Bike,Logistic,All,Injured vs Non-Injured,Hit and Run,Road Surface: Unknown,"Road Surface: Wet, Weekday",-0.0028,0,0.9747,0.9762,0.9985,1,0,0,0.0028
+Bike,Logistic,Infrastructural,Degree of Injury,Bike Lane,Infrastructure Present,"Sum Traffic Calming Devices, Total Watts",0,0,0.6388,0.6388,1,1,0,0,0
+Bike,Logistic,Infrastructural,Fatal vs Non-Fatal,Speed Limit,Bike Lane,"Bike Lane, Infrastructure Present",0,0,0.994,0.994,0,0,1,1,0
+Bike,Logistic,Infrastructural,Injured vs Non-Injured,"Speed Limit, Total Watts",Infrastructure Present,"Speed Limit, Total Watts",0,0,0.9762,0.9762,1,1,0,0,0
+Bike,Random Forest,All,Degree of Injury,Total Watts,Crash Hour,Weekday,0.0445,0.0992,0.6284,0.6478,0.8925,0.9252,0.124,0.1694,0.0547
+Bike,Random Forest,All,Fatal vs Non-Fatal,Drugs Involved,"Alcohol Involved, Crash Hour","Speed Limit, Total Watts",0,0,0.994,0.994,0,0,1,1,0
+Bike,Random Forest,All,Injured vs Non-Injured,Total Watts,Weekday,Crash Hour,0,0,0.9762,0.9762,1,1,0,0,0
+Bike,Random Forest,Infrastructural,Degree of Injury,Total Watts,Speed Limit,Sum Traffic Calming Devices,-0.0169,0.0422,0.5985,0.6239,0.8668,0.9182,0.0909,0.1364,0.0591
+Bike,Random Forest,Infrastructural,Fatal vs Non-Fatal,Total Watts,Speed Limit,Sum Traffic Calming Devices,0,0,0.994,0.994,0,0,1,1,0
+Bike,Random Forest,Infrastructural,Injured vs Non-Injured,Total Watts,Speed Limit,Bike Lane,-0.0053,0,0.9732,0.9762,0.9969,1,0,0,0.0053
+Bike,Ridge,All,Degree of Injury,Weather Condition: Snow,Road Surface: Ice,Drugs Involved,0.0509,0.1129,0.6403,0.6627,0.9463,0.965,0.0909,0.1281,0.062
+Bike,Ridge,All,Fatal vs Non-Fatal,Drugs Involved,Road Surface: Ice,Crash Speed Involved,0,0.3986,0.994,0.9955,0,0.25,0.9985,1,0.3986
+Bike,Ridge,All,Injured vs Non-Injured,Road Surface: Unknown,Hit and Run,Dark- No Street Lights,0,0,0.9762,0.9762,1,1,0,0,0
+Bike,Ridge,Infrastructural,Degree of Injury,Bike Lane,Infrastructure Present,Sum Traffic Calming Devices,0,0,0.6388,0.6388,1,1,0,0,0
+Bike,Ridge,Infrastructural,Fatal vs Non-Fatal,"Bike Lane, Sum Traffic Calming Devices","Bike Lane, Sum Traffic Calming Devices",Infrastructure Present,0,0,0.994,0.994,0,0,1,1,0
+Bike,Ridge,Infrastructural,Injured vs Non-Injured,Infrastructure Present,Bike Lane,"Speed Limit, Sum Traffic Calming Devices",0,0,0.9762,0.9762,1,1,0,0,0
+Ped,LASSO,All,Degree of Injury,Marijuana Involved,Drugs Involved,Road Surface: Ice,-0.0516,0.0604,0.5528,0.603,0.8444,0.8972,0.1097,0.1603,0.112
+Ped,LASSO,All,Fatal vs Non-Fatal,Marijuana Involved,Drugs Involved,Hit and Run,0.2996,0.509,0.953,0.9664,0.2069,0.3793,0.9894,0.9965,0.2094
+Ped,LASSO,All,Injured vs Non-Injured,NA,NA,NA,0,0,0.9983,0.9983,1,1,0,0,0
+Ped,LASSO,Infrastructural,Degree of Injury,Bike Lane,Infrastructure Present,Speed Limit,-0.0134,0.0051,0.5963,0.6047,0.9861,1,0,0.0127,0.0185
+Ped,LASSO,Infrastructural,Fatal vs Non-Fatal,NA,NA,NA,0,0,0.9513,0.9513,0,0,1,1,0
+Ped,LASSO,Infrastructural,Injured vs Non-Injured,NA,NA,NA,0,0,0.9983,0.9983,1,1,0,0,0
+Ped,Logistic,All,Degree of Injury,Alcohol Involved,Drugs Involved,Crash Speed Involved,-0.0434,0.0662,0.5544,0.5997,0.8389,0.8806,0.1224,0.1899,0.1096
+Ped,Logistic,All,Fatal vs Non-Fatal,Drugs Involved,Hit and Run,Crash Speed Involved,0.2374,0.5299,0.9513,0.9664,0.1724,0.4138,0.9877,0.9965,0.2925
+Ped,Logistic,All,Injured vs Non-Injured,Hit and Run,"Crash Hour, Hit and Run",Total Watts,-0.0025,0,0.9933,0.9983,0.995,1,0,0,0.0025
+Ped,Logistic,Infrastructural,Degree of Injury,"Bike Lane, Total Watts","Bike Lane, Infrastructure Present",Speed Limit,-0.0149,0.0253,0.5946,0.6114,0.9806,1,0.0042,0.0211,0.0402
+Ped,Logistic,Infrastructural,Fatal vs Non-Fatal,Speed Limit,Bike Lane,Total Watts,0,0,0.9513,0.9513,0,0,1,1,0
+Ped,Logistic,Infrastructural,Injured vs Non-Injured,Sum Traffic Calming Devices,Total Watts,Speed Limit,0,0,0.9983,0.9983,1,1,0,0,0
+Ped,Random Forest,All,Degree of Injury,Total Watts,Crash Hour,Weekday,0.002,0.0601,0.5745,0.598,0.8583,0.8833,0.1266,0.1814,0.0581
+Ped,Random Forest,All,Fatal vs Non-Fatal,Drugs Involved,Hit and Run,Crash Hour,0.1574,0.4074,0.9513,0.9631,0.1034,0.2759,0.9929,1,0.25
+Ped,Random Forest,All,Injured vs Non-Injured,Sum Traffic Calming Devices,"Road Character: Driveway or Alley, Weekday","Crash Hour, Speed Limit, Sum Traffic Calming Devices, Total Watts, Weekday",0,0,0.9983,0.9983,1,1,0,0,0
+Ped,Random Forest,Infrastructural,Degree of Injury,Total Watts,Speed Limit,Sum Traffic Calming Devices,0.0613,0.1233,0.5913,0.6147,0.825,0.8528,0.2025,0.2743,0.062
+Ped,Random Forest,Infrastructural,Fatal vs Non-Fatal,Total Watts,Speed Limit,Sum Traffic Calming Devices,-0.0119,0,0.9446,0.9513,0,0,0.9929,1,0.0119
+Ped,Random Forest,Infrastructural,Injured vs Non-Injured,Total Watts,Speed Limit,Sum Traffic Calming Devices,0,0,0.9983,0.9983,1,1,0,0,0
+Ped,Ridge,All,Degree of Injury,Marijuana Involved,Drugs Involved,Road Surface: Ice,-0.0437,0.0429,0.5561,0.593,0.8472,0.8889,0.1139,0.1603,0.0866
+Ped,Ridge,All,Fatal vs Non-Fatal,Marijuana Involved,Drugs Involved,Road Surface: Ice,0.2638,0.4728,0.9564,0.9648,0.1724,0.3448,0.9929,0.9965,0.209
+Ped,Ridge,All,Injured vs Non-Injured,Road Surface: Unknown,Road Character: Driveway or Alley,Sum Traffic Calming Devices,0,0,0.9983,0.9983,1,1,0,0,0
+Ped,Ridge,Infrastructural,Degree of Injury,Bike Lane,Infrastructure Present,Sum Traffic Calming Devices,-0.0134,0,0.5963,0.603,0.9861,1,0,0.0127,0.0134
+Ped,Ridge,Infrastructural,Fatal vs Non-Fatal,Bike Lane,Sum Traffic Calming Devices,Infrastructure Present,0,0,0.9513,0.9513,0,0,1,1,0
+Ped,Ridge,Infrastructural,Injured vs Non-Injured,Sum Traffic Calming Devices,"Bike Lane, Sum Traffic Calming Devices",Bike Lane,0,0,0.9983,0.9983,1,1,0,0,0
