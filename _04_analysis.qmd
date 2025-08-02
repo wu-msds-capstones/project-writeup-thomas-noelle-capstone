@@ -45,28 +45,84 @@ These exploratory findings informed our subsequent modeling strategy by highligh
 
 ## Feature Importance Analysis
 
-In order to better understand the relationship between the relevant features and bicycle/pededstrian safety, we propose the exploration of classification models that classify the injury risk of crashes. We will then examine the features that are most predictive of injury risk. Predictive power/classification accuracy is not the focus of this study, but it does provide insight into how strong the relationships between variables are. 
+To better understand the relationship between relevant features and bicycle or pedestrian safety, this study explores the use of classification models to categorize crash severity. The primary focus is not predictive performance but rather the interpretation of feature importance. Nevertheless, the predictive strength of a model can still provide some indication of the strength of the underlying relationships between variables.
 
-### Logistic Regression
+### Data Subsets
 
-#### Injury vs. No Injury
-To begin, we will explore a logistic regression model that predicts the binary variable `injured`, indicating whether or not one was injured in a crash. We start with all of the available observations and include those predictors which we believe potentially have a significant impact on the severity of the crash, as measured by whether or not someone was injured in the crash. These predictors are the speed limit, whether or not a bike lane was present, the sum of traffic calming devices like speed bumps, the presence of other infrastructural features like neighborhood greenways and buffered bike lanes, and the sum of watts per intersections as a measure of street lighting.
+To enhance the accuracy and interpretability of predictive models for crash severity, this study employs both aggregate and disaggregated datasets. Specifically, models are trained on all crash data, bicycle-involved crashes, and pedestrian-involved crashes as separate subsets. This approach is grounded in the recognition that different road user types are subject to distinct risk profiles, behavioral dynamics, and environmental interactions.
 
-The target variable proves to be balanced, with 49,649 observations uninjured, and 45,192 observations injured. First, an 80/20 train-test split is completed, and any categorical columns are converted to dummy variables. To prevent multicollinearity in the data, one column per categorical predictor is removed. Once this is done, we check the Variance Inflation Factor (VIF) in order to further analyze collinearity in the data. Subsequently, the logistic regression model is trained on the training data, and evaluated on the test data for generalization. 
+Modeling all crashes provides a comprehensive understanding of severity factors across the full spectrum of road users. However, disaggregating the data by crash type allows the models to capture subgroup-specific patterns that may be obscured in the aggregate analysis. For instance, factors influencing injury severity in pedestrian-involved crashes, such as lighting conditions or urban design features, may differ substantially from those relevant to motor vehicle collisions or bicycle-related incidents.
 
-This procedure is recycled with slight variations for the rest of the models in this section. We will now explore other methods and procedures that provide insight into crash safety below.
+Disaggregating the data allows for the identification of road-user-specific risk factors that may be diluted or overlooked in models trained on the full dataset. By isolating the relationships between predictors and severity outcomes within bicycle- or pedestrian-involved crashes, the resulting feature importance measures can offer more targeted insights. This approach supports more nuanced interpretations of the data and facilitates the development of tailored safety interventions for each road user group.
 
-#### Fatal vs Non Fatal
-Understanding the features that contribute to fatal vs non fatal car crashes is important for understanding crash severity. The same procedure is completed for this analysis as the previous one, however one significant difference that affects the power of the model is class imbalance. Only 373 observations were fatal compared to 94,468 that were not fatal. 
+### Target Variables
 
-#### Bike/Pedestrian Granularity
-By using all of the data in the `crashes` dataset, we are able to conduct a high-level analysis of which features most contribute to crash injury/fatality. However, this tells us little about the relationship between infrastructure features and bike/pedestrian crashes in particular. The class imbalance for fatal crashes is even more extreme for bicycle and pedestrian crashes. It is also more extreme for injury-- Most bike or pedestrian crashes involve an injury as well, and few are property damage only.
+The target variable, crash severity, can be framed in a variety of different but related ways, each capturing a different aspect of the outcome. In this study, we examine three binary classification targets related to crash severity:
 
-However, one aspect we can examine is the degree to which one is injured. The variable `highest_inj_svrty_desc` describes the highest injury severity of the crash, and takes the form of one of five categories: No Apparent Injury/PDO Crash, Possible Injury Crash, Suspected Minor Injury Crash, Suspected Serious Injury, and Fatal Injury. Based on the distribution of these classes, [REFER TO FIGURE] we can create a binary target variable with which we can classify minor injuries versus major injuries/fatalities, and thus explore the question of which features make a difference in the degree of injury severity.
+**Fatal Crash**: whether or not the crash resulted in a fatality.
 
-#### Regularization
-One way we can also analyze variable importance is through regularization techniques in our linear models. The LASSO method sets the least important coefficients to zero, and the Ridge regression method shrinks them. Here we include other variables into the models as well to see how LASSO/Ridge selects for them.
+**Injury Crash**: whether or not any injury was reported.
 
-### Random Forests
-Random forests are also useful for analyzing feature importance in a model. Trees will ignore irrelevant features. All of the above methods can be compared to see which features may be most predictive of crash safety. In the subsequent section, we will examine the results of each of these models.
+**Major Injury Crash**: whether the crash resulted in a severe injury, based on a consolidated classification.
+
+For the third target, we group the injury types shown in Figure 2b into two broader categories: major injuries, comprising "Fatal Injury," "Suspected Serious Injury," and "Suspected Minor Injury"; and minor or no injuries, comprising "Possible Injury" and "No Apparent Injury." This aggregation reflects a simplified but policy-relevant distinction between more and less severe injury outcomes.
+
+Although all three targets serve as proxies for crash severity, each provides a unique lens for analysis. For instance, fatal crashes are rare but socially critical, while the injury-based targets may capture broader systemic risk patterns across road users.
+
+Because all three targets exhibit varying degrees of class imbalance, particularly fatal crashes, model interpretation must be situated within the context of imbalanced learning. Figure [X] presents the distribution of each crash severity target by road user type to illustrate the degree of imbalance and variation across populations.
+
+```{r}
+crashes_predictors %>% 
+  select(fatal, injured, major, bike_flg, ped_flg) %>%
+  pivot_longer(cols = c(fatal, injured, major),
+               names_to = "Target",
+               values_to = "Target_Flag") %>%
+  mutate(`Road User Type` = case_when(
+    bike_flg == "Yes" ~ "Bike",
+    ped_flg == "Yes" ~ "Pedestrian",
+    TRUE ~ "Motorist"
+  )) %>%
+  group_by(Target, `Road User Type`, Target_Flag) %>%
+  summarize(n = n(), .groups = "drop") %>%
+  group_by(Target, `Road User Type`) %>%
+  mutate(proportion = n / sum(n)) %>%
+  ggplot(aes(x = `Road User Type`, y = proportion, fill = Target_Flag)) +
+  geom_col(position = "stack") +
+  facet_wrap(~ Target) +
+  labs(title = "Proportion of Road User Crash Outcomes by Type",
+       x = "Road User Type",
+       y = "Proportion",
+       fill = "Flag (TRUE = Crash)") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme_bw()
+
+```
+
+Of significant note is the class imbalance between fatal and non-fatal car crashes. Of the 94,841 crashes in our dataset, 373 (~0.4%) were fatal. Of those, 23 were bicycle crashes, and 148 were pedestrian crashes. The class imbalance persists for Bicycle, Pedestrian, and Motorists.
+
+Unsurprisingly, most reported crashes that involve a bicycle or pedestrian also involve an injury. The remaining class imbalance for motorists is roughly divided in two, which justifies the class balance when training a model on all crashes rather than subsets of bicycles or pedestrians. 
+
+On the other hand, by composing a feature of injury severity as explained above, the class balance between major and minor injuries for bikes and pedestrians are far more comparable.
+
+### Predictor Subsets
+
+Given the complexity and variation across road users and crash severity outcomes, it is equally important to consider the types of predictors used in modeling. To address this, we implement two modeling strategies: one utilizing all available predictors, and another constrained to infrastructure-specific features (e.g., road design, surface conditions, lighting, and traffic controls).
+
+While models with all predictors allow for a more complete understanding of the multifaceted drivers of crash severity, they may also incorporate variables that are less actionable from a planning or policy standpoint. In contrast, infrastructure-only models are designed to isolate the influence of modifiable aspects of the built environment, which are most relevant to decision-makers in transportation planning and roadway design.
+
+By comparing the feature importance outputs from these two model types, we can assess the extent to which crash severity can be explained by infrastructure alone, versus more complex contextual or behavioral variables. This dual approach supports both broad analytical insight and practical, intervention-oriented recommendations.
+
+### Modeling
+
+Given the central importance of feature importance in this study, we selected classification models that facilitate interpretable insights into the predictors of crash severity. Four modeling techniques were employed: Random Forest, Logistic Regression, and Logistic Regression with LASSO and Ridge regularization. These methods were chosen to provide complementary perspectives on variable importance, balancing interpretability and predictive robustness.
+
+Models were trained for each combination of data subsets (all crashes, bicycle-involved crashes, pedestrian-involved crashes), target outcomes (injury vs. non-injury, fatal vs. non-fatal, degree of injury), predictor subsets (all features versus infrastructure-specific features), and model type. Each model was trained and evaluated using a five-fold cross-validation scheme on an 80/20 train-test split.
+
+To account for class imbalances common in crash severity data, model performance was assessed using Cohen’s Kappa statistic rather than standard accuracy metrics. This choice enables a more reliable evaluation of predictive agreement beyond random chance.
+
+To assess model stability and the consistency of feature importance, each model configuration was trained and evaluated across five iterations with different random seeds. For each configuration, the minimum and maximum Kappa values are reported, along with the three most influential features determined by a majority vote across iterations. This comprehensive framework yields a detailed comparison of model performance and key predictors across varying data partitions and model specifications.
+
+
+
+
 
