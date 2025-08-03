@@ -1,6 +1,180 @@
 # Results
 
-This section presents the results of our classification models across combinations of crash types (all, bicycle-involved, pedestrian-involved), outcome variables (fatal, injury, major injury), predictor sets (all features, infrastructure-only), and modeling approaches (Logistic Regression, LASSO, Ridge, Random Forest). Our focus is on model interpretability, with an emphasis on feature importance rankings rather than predictive performance alone. Cohen’s Kappa is used as the primary evaluation metric due to class imbalance. For each modeling configuration, we report predictive agreement and the top three contributing features.
+This section presents the results of our classification models across combinations of crash types (all, bicycle-involved, pedestrian-involved), outcome variables (fatal, injury, major injury), predictor sets (all features, infrastructure-only), and modeling approaches (Logistic Regression, LASSO, Ridge, Random Forest). Our focus is on model interpretability, with an emphasis on feature importance rankings rather than predictive performance alone. Cohen’s Kappa is used as the primary evaluation metric due to class imbalance. For each modeling configuration, we report predictive agreement and the top three contributing features. A detailed table view is presented in the Appendix.
+
+```{r}
+library(patchwork)
+results_agg <- read_csv("data/modeling_results_agg.csv")
+results_heatmap <- results_agg %>%
+  filter(`Predictors Subset` == "All") %>%
+  pivot_longer(cols = c(`Highest Importance`, `2nd Highest Importance`, `3rd Highest Importance`), names_to = "Rank", values_to = "Feature") %>%
+  filter(Feature != "") %>%
+  mutate(Feature = str_split(Feature, ",")) %>%
+  unnest(Feature) %>%
+  mutate(Feature = str_trim(Feature)) %>%
+  mutate(
+    Importance_Rank = case_when(
+      Rank == "Highest Importance" ~ 1,
+      Rank == "2nd Highest Importance" ~ 2,
+      Rank == "3rd Highest Importance" ~ 3
+    ),
+    Model_ID = paste(`Model Type`, `Target Variable`, sep = " - ")
+  ) %>%
+  group_by(`Data Subset`, Model_ID, Feature) %>%
+  slice_min(order_by = Importance_Rank, with_ties = TRUE) %>%
+  ungroup()
+results_heatmap_infra <- results_agg %>%
+  filter(`Predictors Subset` == "Infrastructural") %>%
+  pivot_longer(cols = c(`Highest Importance`, `2nd Highest Importance`, `3rd Highest Importance`), names_to = "Rank", values_to = "Feature") %>%
+  filter(Feature != "") %>%
+  mutate(Feature = str_split(Feature, ",")) %>%
+  unnest(Feature) %>%
+  mutate(Feature = str_trim(Feature)) %>%
+  mutate(
+    Importance_Rank = case_when(
+      Rank == "Highest Importance" ~ 1,
+      Rank == "2nd Highest Importance" ~ 2,
+      Rank == "3rd Highest Importance" ~ 3
+    ),
+    Model_ID = paste(`Model Type`, `Target Variable`, sep = " - ")
+  ) %>%
+  group_by(`Data Subset`, Model_ID, Feature) %>%
+  slice_min(order_by = Importance_Rank, with_ties = TRUE) %>%
+  ungroup()
+results_heatmap$Feature <- factor(results_heatmap$Feature, levels = c(
+  # Driver Behavior
+  "Alcohol Involved", "Drugs Involved", "Marijuana Involved", "Crash Speed Involved", "Hit and Run",
+  # Environment
+  "Road Surface: Snow", "Road Surface: Ice", "Road Surface: Wet", "Road Surface: Unknown", 
+  "Road Character: Driveway or Alley", "Weather Condition: Snow",
+  # Human Influenced Factors
+  "Dark- No Street Lights", "Total Watts", "Speed Limit", "Sum Traffic Calming Devices", 
+  # Other
+  "Crash Hour", "Weekday"
+))
+results_heatmap$Model_ID <- factor(results_heatmap$Model_ID, levels = c(
+  "Logistic - Injured vs Non-Injured", "LASSO - Injured vs Non-Injured", 
+  "Ridge - Injured vs Non-Injured",  "Random Forest - Injured vs Non-Injured", 
+  "Logistic - Degree of Injury", "LASSO - Degree of Injury", 
+  "Ridge - Degree of Injury", "Random Forest - Degree of Injury",
+  "Logistic - Fatal vs Non-Fatal", "LASSO - Fatal vs Non-Fatal", 
+  "Ridge - Fatal vs Non-Fatal", "Random Forest - Fatal vs Non-Fatal"
+))
+results_heatmap_infra$Model_ID <- factor(results_heatmap_infra$Model_ID, levels = c(
+  "Logistic - Injured vs Non-Injured", "LASSO - Injured vs Non-Injured", 
+  "Ridge - Injured vs Non-Injured",  "Random Forest - Injured vs Non-Injured", 
+  "Logistic - Degree of Injury", "LASSO - Degree of Injury", 
+  "Ridge - Degree of Injury", "Random Forest - Degree of Injury",
+  "Logistic - Fatal vs Non-Fatal", "LASSO - Fatal vs Non-Fatal", 
+  "Ridge - Fatal vs Non-Fatal", "Random Forest - Fatal vs Non-Fatal"
+))
+```
+
+```{r}
+heatmap_all_all <- results_heatmap %>% filter(`Data Subset` == "All") %>%
+ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+  geom_tile(color = "white") +
+  scale_fill_manual(
+    values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+    name = "Rank"
+  ) +
+  labs(
+    title = "All Predictors",
+    x = "Top Features",
+    y = "Model Configuration"
+  ) +
+  theme_bw(base_size = 12) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(size = 12),
+    panel.grid = element_blank(),
+    legend.position = "none"
+  )
+
+heatmap_all_inf <- results_heatmap_infra %>% filter(`Data Subset` == "All") %>%
+ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+  geom_tile(color = "white") +
+  scale_fill_manual(
+    values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+    name = "Rank"
+  ) +
+  scale_y_discrete(drop = FALSE) +
+  labs(
+    title = "Infrastructure",
+    x = "",
+    y = ""
+  ) +
+  theme_bw(base_size = 12) +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(size = 12),
+    panel.grid = element_blank()
+  )
+
+combined_plot <- heatmap_all_all + heatmap_all_inf + plot_layout(ncol = 2, widths = c(2, 1)) +
+  plot_annotation(
+    title = "Feature Importance Heatmap Across Model Configurations (All Crashes)",
+    theme = theme(
+      plot.title = element_text(hjust = 5, size = 14, face = "bold")
+    )
+  )
+```
+
+```{r}
+combined_plot
+```
+
+```{r}
+#| fig-width: 10
+#| fig-height: 6
+combined_plot
+```
+
+
+```{r}
+results_heatmap %>% filter(`Data Subset` == "Bike") %>%
+ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+  geom_tile(color = "white") +
+  scale_fill_manual(
+    values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+    name = "Rank"
+  ) +
+  labs(
+    title = "Feature Importance Heatmap Across Model Configurations",
+    x = "Top Features",
+    y = "Model Configuration"
+  ) +
+  theme_bw(base_size = 12) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid = element_blank()
+  )
+```
+
+```{r}
+results_heatmap %>% filter(`Data Subset` == "Ped") %>%
+ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+  geom_tile(color = "white") +
+  scale_fill_manual(
+    values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+    name = "Rank"
+  ) +
+  labs(
+    title = "Feature Importance Heatmap Across Model Configurations",
+    x = "Top Features",
+    y = "Model Configuration"
+  ) +
+  theme_bw(base_size = 12) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid = element_blank()
+  )
+```
+
+
+
 
 
 

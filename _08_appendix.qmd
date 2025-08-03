@@ -4,7 +4,6 @@ Below is the full results table aggregated from every combination of model used:
 
 ```{r}
 library(DT)
-results_agg <- read_csv("data/modeling_results_agg.csv")
 datatable(
   results_agg,
   options = list(
