@@ -329,16 +329,40 @@ crashes_predictors %>%
   group_by(Target, `Road User Type`, Target_Flag) %>%
   summarize(n = n(), .groups = "drop") %>%
   group_by(Target, `Road User Type`) %>%
-  mutate(proportion = n / sum(n)) %>%
+  mutate(
+    proportion = n / sum(n),
+    Target = ifelse(Target == "major", "Major Injury", str_to_title(Target)),
+    Target_Flag = str_to_title(Target_Flag),
+    Target_Flag = factor(Target_Flag, levels = c("True", "False"))
+  ) %>%
+  mutate(
+    label_position = cumsum(proportion) - (0.5 * proportion),
+    label_text = ifelse(proportion > 0.03, paste0(scales::percent(proportion, accuracy = 0.1)), NA)
+  ) %>%
   ggplot(aes(x = `Road User Type`, y = proportion, fill = Target_Flag)) +
-  geom_col(position = "stack") +
-  facet_wrap(~ Target) +
-  labs(title = "",
-       x = "Road User Type",
-       y = "Proportion",
-       fill = "Flag (TRUE = Crash)") +
-  scale_y_continuous(labels = scales::percent_format()) +
-  theme_bw()
+    geom_col(position = "stack", width = 0.75) +
+    facet_wrap(~ Target) +
+    labs(title = "",
+         x = "Road User Type",
+         y = "",
+         fill = "Flag (True = Belongs to Target Category)") +
+    scale_y_continuous(labels = scales::percent_format()) +
+    scale_fill_manual(values = c("skyblue2", "red2")) +
+    geom_text(
+      aes(y = label_position, label = label_text),
+      color = "black",
+      size = 3.5,
+      position = "identity"
+    ) +
+    theme_bw() +
+    theme(
+      axis.text.x = element_text(size = 11),
+      panel.grid.major.x = element_blank(),
+      legend.position = "top",
+      legend.title = element_text(face = "bold"),
+      strip.text = element_text(size = 12),
+      strip.background = element_rect(fill = "gray95")
+    )
 ```
 
 Of significant note is the class imbalance between fatal and non-fatal car crashes. Of the 94,841 crashes in the final dataset, 373 (~0.4%) were fatal. Of those, 23 were bicycle crashes, and 148 were pedestrian crashes. The class imbalance persists for Bicycle, Pedestrian, and Motorists.
