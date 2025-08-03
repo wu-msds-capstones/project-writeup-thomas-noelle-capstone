@@ -2,6 +2,10 @@
 
 This section presents the results of our classification models across combinations of crash types (all, bicycle-involved, pedestrian-involved), outcome variables (fatal, injury, major injury), predictor sets (all features, infrastructure-only), and modeling approaches (Logistic Regression, LASSO, Ridge, Random Forest). Our focus is on model interpretability, with an emphasis on feature importance rankings rather than predictive performance alone. Cohen’s Kappa is used as the primary evaluation metric due to class imbalance. For each modeling configuration, we report predictive agreement and the top three contributing features. A detailed table view is presented in the Appendix.
 
+Some of the models have more than one feature per a particular rank in the top three. These are ties based on the most common occurrence among the five model runs that were completed. 
+
+The LASSO model has the power to shrink some coefficients on predictors to zero. If this occurs for every predictor in the dataset, then no features will show up in the top three. This occurs in some of the bike/pedestrian data subsets.
+
 ```{r}
 library(patchwork)
 results_agg <- read_csv("data/modeling_results_agg.csv")
@@ -113,66 +117,125 @@ ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank)
     panel.grid = element_blank()
   )
 
-combined_plot <- heatmap_all_all + heatmap_all_inf + plot_layout(ncol = 2, widths = c(2, 1)) +
-  plot_annotation(
-    title = "Feature Importance Heatmap Across Model Configurations (All Crashes)",
-    theme = theme(
-      plot.title = element_text(hjust = 5, size = 14, face = "bold")
-    )
-  )
+heatmap_all_visual <- heatmap_all_all + heatmap_all_inf + plot_layout(ncol = 2, widths = c(2, 1))
 ```
 
 ```{r}
-combined_plot
-```
-
-```{r}
-#| fig-width: 10
-#| fig-height: 6
-combined_plot
+#| label: figure-7a
+#| fig-cap: "Feature Importance Heatmap Across Model Configurations (All Crashes)"
+#| fig-align: center
+heatmap_all_visual
 ```
 
 
 ```{r}
-results_heatmap %>% filter(`Data Subset` == "Bike") %>%
+heatmap_bike_all <- results_heatmap %>% filter(`Data Subset` == "Bike") %>%
 ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
   geom_tile(color = "white") +
   scale_fill_manual(
     values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
     name = "Rank"
   ) +
+  scale_y_discrete(drop = FALSE) +
   labs(
-    title = "Feature Importance Heatmap Across Model Configurations",
+    title = "All Predictors",
     x = "Top Features",
     y = "Model Configuration"
   ) +
   theme_bw(base_size = 12) +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
-    panel.grid = element_blank()
+    plot.title = element_text(size = 12),
+    panel.grid = element_blank(),
+    legend.position = "none"
   )
-```
 
-```{r}
-results_heatmap %>% filter(`Data Subset` == "Ped") %>%
+heatmap_bike_inf <- results_heatmap_infra %>% filter(`Data Subset` == "Bike") %>%
 ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
   geom_tile(color = "white") +
   scale_fill_manual(
     values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
     name = "Rank"
   ) +
+  scale_y_discrete(drop = FALSE) +
   labs(
-    title = "Feature Importance Heatmap Across Model Configurations",
+    title = "Infrastructure",
+    x = "",
+    y = ""
+  ) +
+  theme_bw(base_size = 12) +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(size = 12),
+    panel.grid = element_blank()
+  )
+
+heatmap_bike_visual <- heatmap_bike_all + heatmap_bike_inf + plot_layout(ncol = 2, widths = c(2.25, 0.75))
+```
+
+```{r}
+#| label: figure-7b
+#| fig-cap: "Feature Importance Heatmap Across Model Configurations (Bike Crashes)"
+#| fig-align: center
+heatmap_bike_visual
+```
+
+
+```{r}
+heatmap_ped_all <- results_heatmap %>% filter(`Data Subset` == "Ped") %>%
+ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+  geom_tile(color = "white") +
+  scale_fill_manual(
+    values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+    name = "Rank"
+  ) +
+  scale_y_discrete(drop = FALSE) +
+  labs(
+    title = "All Predictors",
     x = "Top Features",
     y = "Model Configuration"
   ) +
   theme_bw(base_size = 12) +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(size = 12),
+    panel.grid = element_blank(),
+    legend.position = "none"
+  )
+
+heatmap_ped_inf <- results_heatmap_infra %>% filter(`Data Subset` == "Ped") %>%
+ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+  geom_tile(color = "white") +
+  scale_fill_manual(
+    values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+    name = "Rank"
+  ) +
+  scale_y_discrete(drop = FALSE) +
+  labs(
+    title = "Infrastructure",
+    x = "",
+    y = ""
+  ) +
+  theme_bw(base_size = 12) +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(size = 12),
     panel.grid = element_blank()
   )
+
+heatmap_ped_visual <- heatmap_ped_all + heatmap_ped_inf + plot_layout(ncol = 2, widths = c(2.1, 0.9))
 ```
 
+```{r}
+#| label: figure-7c
+#| fig-cap: "Feature Importance Heatmap Across Model Configurations (Ped. Crashes)"
+#| fig-align: center
+heatmap_ped_visual
+```
 
 
 

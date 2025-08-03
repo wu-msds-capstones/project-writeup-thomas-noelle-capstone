@@ -313,6 +313,9 @@ Although all three targets serve as proxies for crash severity, each provides a 
 Because all three targets exhibit varying degrees of class imbalance, particularly fatal crashes, model interpretation must be situated within the context of imbalanced learning. Figure [X] presents the distribution of each crash severity target by road user type to illustrate the degree of imbalance across populations.
 
 ```{r}
+#| label: figure-6
+#| fig-cap: "Proportion of Road User Crash Outcome by Type"
+#| fig-align: center
 crashes_predictors %>% 
   select(fatal, injured, major, bike_flg, ped_flg) %>%
   pivot_longer(cols = c(fatal, injured, major),
@@ -330,13 +333,12 @@ crashes_predictors %>%
   ggplot(aes(x = `Road User Type`, y = proportion, fill = Target_Flag)) +
   geom_col(position = "stack") +
   facet_wrap(~ Target) +
-  labs(title = "Proportion of Road User Crash Outcomes by Type",
+  labs(title = "",
        x = "Road User Type",
        y = "Proportion",
        fill = "Flag (TRUE = Crash)") +
   scale_y_continuous(labels = scales::percent_format()) +
   theme_bw()
-
 ```
 
 Of significant note is the class imbalance between fatal and non-fatal car crashes. Of the 94,841 crashes in the final dataset, 373 (~0.4%) were fatal. Of those, 23 were bicycle crashes, and 148 were pedestrian crashes. The class imbalance persists for Bicycle, Pedestrian, and Motorists.
