@@ -253,15 +253,18 @@ A heat density map (**Figure 6**) highlights clusters of bicycle and pedestrian-
 <iframe src="figures/heat-density.html" width="100%" height="600px" style="border:none;"></iframe>  
 **Figure 6:** Heat density of bicycle and pedestrian-involved crashes across Portland.
 
+
 ### Crash Severity  
 As shown in **Figure 7**, the distribution of injury severity shifts toward more serious outcomes for vulnerable road users. Compared to all crashes, bicycle and pedestrian-involved crashes rarely fall into the "no apparent injury/property damage only (PDO)" category and are far more likely to result in suspected minor or serious injuries, with fatalities present in smaller numbers. This pattern reflects the reality that collisions involving people on bikes or on foot almost always result in some degree of injury.
 
 ![**Figure 7:** Injury severity distribution comparing all crashes with bicycle and pedestrian-involved crashes.](figures/severity-dist.png)  
 
+
 ### Infrastructure Coverage and Grouping  
 **Figure 8** shows that most crashes occurred at intersections without bicycle-specific infrastructure, reflecting both the broader street network composition and higher exposure along non-greenway routes. Intersections with greenways or calming features represented a much smaller share of crashes, consistent with their more limited coverage across the city. When greenways and calming features did overlap, crashes were comparatively rare, underscoring their intended role as lower-stress corridors. This figure shows crash counts rather than crash rates, providing a baseline view before incorporating traffic volume in the next section.  
 
 ![**Figure 8:** Crash counts by infrastructure grouping, comparing intersections with no infrastructure to those with greenways and calming features.](figures/infra-grouping.png)  
+
 
 ### Crash Rates by Infrastructure and Traffic Volume  
 Crash rates per intersection were examined across combined infrastructure groupings and stratified by traffic volume tertiles. As shown in **Figure 9**, rates were substantially higher in high-volume areas overall, but intersections with calming features—particularly those paired with greenways—experienced markedly fewer crashes than those lacking interventions.  
@@ -270,16 +273,19 @@ In medium- and low-volume areas, crash rates were much lower across all infrastr
 
 ![**Figure 9:** Bicycle and pedestrian-involved crash rates per intersection by infrastructure grouping and traffic volume tertile, highlighting the stronger impact of calming features in high-volume areas.](figures/volume-crash.png)  
 
+
 ### Speed Environment  
 As shown in **Figure 10**, crashes on greenways are concentrated in lower speed environments, typically 20 to 25 mph, while crashes on regular streets span a wider range of posted speed limits, extending to 35 mph and above. Severe and fatal crashes are more common at the higher end of this range, reinforcing the established relationship between speed and injury severity.  
 
 ![**Figure 10:** Distribution of posted speed limits at crash locations by street type and crash severity, highlighting that severe crashes are concentrated at higher speeds.](figures/speed-violin.png)  
+
 
 ### Spatial Patterns  
 The interactive map in **Figure 11** provides a citywide view of bicycle and pedestrian-involved crashes alongside Portland’s active transportation network. The map distinguishes **Neighborhood Greenways**, **other bike facilities**, and **off-street trails**, and overlays traffic calming features to show their distribution relative to crash locations.  
 
 <iframe src="figures/spatial-map.html" width="100%" height="600px" style="border:none;"></iframe>  
 **Figure 11:** Interactive map of bicycle and pedestrian-involved crashes, greenways, other bike facilities, off-street trails, and traffic calming features.
+
 
 ### Integrating Findings  
 This exploratory analysis demonstrates that bicycle and pedestrian-involved crashes are most concentrated in high-speed, high-volume corridors with limited infrastructure, while intersections with greenways, calming features, and lower speed limits see fewer and less severe crashes. These insights directly informed our modeling approach, where we tested these relationships formally while controlling for traffic exposure and environmental context.
@@ -290,7 +296,6 @@ This exploratory analysis demonstrates that bicycle and pedestrian-involved cras
 To better understand the relationship between relevant features and bicycle or pedestrian safety, this study explores the use of classification models to categorize crash severity. The primary focus is not predictive performance but rather the interpretation of feature importance. Nevertheless, the predictive strength of a model can still provide some indication of the strength of the underlying relationships between variables.
 
 ### Data Subsets
-
 To enhance the accuracy and interpretability of predictive models for crash severity, this study employs both aggregate and disaggregated datasets. Specifically, models are trained on all crash data, bicycle-involved crashes, and pedestrian-involved crashes as separate subsets. This approach is grounded in the recognition that different road user types are subject to distinct risk profiles, behavioral dynamics, and environmental interactions.
 
 Modeling all crashes provides a comprehensive understanding of severity factors across the full spectrum of road users. However, disaggregating the data by road user type allows the models to capture subgroup-specific patterns that may be obscured in the aggregate analysis. For instance, factors influencing injury severity in pedestrian-involved crashes, such as lighting conditions or road infrastructure features, may differ substantially from those relevant to motor vehicle collisions or bicycle-related incidents.
@@ -298,7 +303,6 @@ Modeling all crashes provides a comprehensive understanding of severity factors 
 Disaggregating the data allows for the identification of road-user-specific risk factors that may be diluted or overlooked in models trained on the full dataset. By isolating the relationships between predictors and severity outcomes within bicycle- or pedestrian-involved crashes, the resulting feature importance measures can offer more targeted insights. This approach supports more nuanced interpretations of the data and facilitates the development of tailored safety interventions for each road user group.
 
 ### Target Variables
-
 The target variable, crash severity, can be framed in a variety of different but related ways, each capturing a different aspect of the outcome. In this study, we examine three binary classification targets related to crash severity:
 
 **Fatal Crash**: whether or not the crash resulted in a fatality.
