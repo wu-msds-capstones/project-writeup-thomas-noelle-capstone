@@ -256,7 +256,7 @@ A heat density map (**Figure 6**) highlights clusters of bicycle and pedestrian-
 ### Crash Severity  
 As shown in **Figure 7**, the distribution of injury severity shifts toward more serious outcomes for vulnerable road users. Compared to all crashes, bicycle and pedestrian-involved crashes rarely fall into the "no apparent injury/property damage only (PDO)" category and are far more likely to result in suspected minor or serious injuries, with fatalities present in smaller numbers. This pattern reflects the reality that collisions involving people on bikes or on foot almost always result in some degree of injury.
 
-![**Figure 7:** Injury severity distribution comparing all crashes with bicycle and pedestrian-involved crashes.](figures/severity-list.png)  
+![**Figure 7:** Injury severity distribution comparing all crashes with bicycle and pedestrian-involved crashes.](figures/severity-dist.png)  
 
 ### Infrastructure Coverage and Grouping  
 **Figure 8** shows that most crashes occurred at intersections without bicycle-specific infrastructure, reflecting both the broader street network composition and higher exposure along non-greenway routes. Intersections with greenways or calming features represented a much smaller share of crashes, consistent with their more limited coverage across the city. When greenways and calming features did overlap, crashes were comparatively rare, underscoring their intended role as lower-stress corridors. This figure shows crash counts rather than crash rates, providing a baseline view before incorporating traffic volume in the next section.  
