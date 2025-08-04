@@ -248,10 +248,12 @@ As shown in **Figure 5**, annual crash counts have remained relatively stable ov
 
 ![**Figure 5:** Annual crash counts comparing all crashes with those involving bicycles or pedestrians.](figures/crash-trends.png)  
 
+
 A heat density map (**Figure 6**) highlights clusters of bicycle and pedestrian-involved crashes across Portland, with concentrations most evident in the downtown core and along key corridors extending into outer neighborhoods. This visualization establishes a baseline view of where crashes are most frequent and sets the stage for examining how infrastructure and speed environments relate to these patterns.  
 
 <iframe src="figures/heat-density.html" width="100%" height="600px" style="border:none;"></iframe>  
 **Figure 6:** Heat density of bicycle and pedestrian-involved crashes across Portland.
+
 
 
 ### Crash Severity  
@@ -260,10 +262,12 @@ As shown in **Figure 7**, the distribution of injury severity shifts toward more
 ![**Figure 7:** Injury severity distribution comparing all crashes with bicycle and pedestrian-involved crashes.](figures/severity-dist.png)  
 
 
+
 ### Infrastructure Coverage and Grouping  
 **Figure 8** shows that most crashes occurred at intersections without bicycle-specific infrastructure, reflecting both the broader street network composition and higher exposure along non-greenway routes. Intersections with greenways or calming features represented a much smaller share of crashes, consistent with their more limited coverage across the city. When greenways and calming features did overlap, crashes were comparatively rare, underscoring their intended role as lower-stress corridors. This figure shows crash counts rather than crash rates, providing a baseline view before incorporating traffic volume in the next section.  
 
 ![**Figure 8:** Crash counts by infrastructure grouping, comparing intersections with no infrastructure to those with greenways and calming features.](figures/infra-grouping.png)  
+
 
 
 ### Crash Rates by Infrastructure and Traffic Volume  
@@ -274,10 +278,12 @@ In medium- and low-volume areas, crash rates were much lower across all infrastr
 ![**Figure 9:** Bicycle and pedestrian-involved crash rates per intersection by infrastructure grouping and traffic volume tertile, highlighting the stronger impact of calming features in high-volume areas.](figures/volume-crash.png)  
 
 
+
 ### Speed Environment  
 As shown in **Figure 10**, crashes on greenways are concentrated in lower speed environments, typically 20 to 25 mph, while crashes on regular streets span a wider range of posted speed limits, extending to 35 mph and above. Severe and fatal crashes are more common at the higher end of this range, reinforcing the established relationship between speed and injury severity.  
 
 ![**Figure 10:** Distribution of posted speed limits at crash locations by street type and crash severity, highlighting that severe crashes are concentrated at higher speeds.](figures/speed-violin.png)  
+
 
 
 ### Spatial Patterns  
@@ -287,13 +293,18 @@ The interactive map in **Figure 11** provides a citywide view of bicycle and ped
 **Figure 11:** Interactive map of bicycle and pedestrian-involved crashes, greenways, other bike facilities, off-street trails, and traffic calming features.
 
 
+
 ### Integrating Findings  
-This exploratory analysis demonstrates that bicycle and pedestrian-involved crashes are most concentrated in high-speed, high-volume corridors with limited infrastructure, while intersections with greenways, calming features, and lower speed limits see fewer and less severe crashes. These insights directly informed our modeling approach, where we tested these relationships formally while controlling for traffic exposure and environmental context.
+The exploratory analysis shows that bicycle and pedestrian-involved crashes are concentrated in high-speed, high-volume corridors with limited infrastructure, while intersections with greenways, calming features, and lower speed limits experience fewer and less severe crashes. These patterns informed the modeling approach by emphasizing variables tied to traffic exposure, speed environments, infrastructure presence, and environmental conditions such as lighting and surface state.
+
+By moving from descriptive trends to formal modeling, we tested whether these observed relationships hold when accounting for multiple factors simultaneously and examined which features most strongly influence crash severity outcomes for different road user groups.
 
 
 ## Feature Importance Analysis
 
-To better understand the relationship between relevant features and bicycle or pedestrian safety, this study explores the use of classification models to categorize crash severity. The primary focus is not predictive performance but rather the interpretation of feature importance. Nevertheless, the predictive strength of a model can still provide some indication of the strength of the underlying relationships between variables.
+Building on the exploratory findings, we applied classification models to assess which features most strongly influence crash severity outcomes. The goal was not to maximize predictive performance but to identify the relative importance of variables highlighted during EDA, such as speed limits, traffic volume, lighting, calming devices, and bike infrastructure.
+
+By focusing on feature importance rather than prediction accuracy, we aimed to evaluate whether the patterns observed in descriptive analysis hold when controlling for other factors. While predictive strength still offers context for interpreting these relationships, the primary value of this modeling approach lies in clarifying which infrastructure, environmental, and contextual features are most associated with injury severity for cyclists and pedestrians.
 
 ### Data Subsets
 To enhance the accuracy and interpretability of predictive models for crash severity, this study employs both aggregate and disaggregated datasets. Specifically, models are trained on all crash data, bicycle-involved crashes, and pedestrian-involved crashes as separate subsets. This approach is grounded in the recognition that different road user types are subject to distinct risk profiles, behavioral dynamics, and environmental interactions.
