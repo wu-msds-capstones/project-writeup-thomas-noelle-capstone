@@ -6,9 +6,11 @@ Neighborhood greenways, introduced earlier as low-speed, low-traffic streets pri
 
 ![**Figure 1:** Components of a neighborhood greenway.](figures/greenway.png)  
 
+
 Complementing greenways, other traffic calming measures include curb extensions, raised crosswalks, and median islands, which improve visibility, shorten crossing distances, and reduce turning speeds (Figure 2).  
 
 ![**Figure 2:** Curb extension in Portland’s Centennial neighborhood.](figures/curbextend.jpeg)  
+
 
 Protected bicycle infrastructure also plays a role. Portland employs a range of bikeway designs, from standard bike lanes to buffered, bollard-protected, and curb-protected facilities, each offering varying levels of physical separation from vehicle traffic (Figure 3).  
 
