@@ -1,0 +1,22 @@
+# Appendix
+
+Below is the full results table aggregated from every combination of model used:
+
+```{r}
+library(DT)
+datatable(
+  results_agg,
+  options = list(
+    paging = FALSE,
+    scrollY = "400px",
+    scrollX = TRUE,       
+    scrollCollapse = TRUE,
+    autoWidth = TRUE,
+    fixedHeader = TRUE 
+  ),
+  class = "nowrap stripe",
+  escape = FALSE
+) %>%
+  formatRound(columns = which(sapply(results_agg, is.numeric)), digits = 4)
+```
+
