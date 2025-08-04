@@ -243,46 +243,47 @@ crashes_predictors <- crashes_all %>%
 
 ## Exploratory Data Analysis (EDA)
 
-### Crash Trends and Severity
+### Crash Trends  
+As shown in **Figure 5**, annual crash counts have remained relatively stable over the study period, with a temporary decline during 2019 to 2021 coinciding with the COVID-19 pandemic. Bicycle and pedestrian-involved crashes consistently represent a small but steady share of all reported crashes.  
 
-As shown in Figure 2a, annual crash counts were relatively stable with a moderate decline during 2019–2021 (COVID-19 pandemic), while bicycle- and pedestrian-involved crashes remained a small but persistent share of all crashes.
+![**Figure 5:** Annual crash counts comparing all crashes with those involving bicycles or pedestrians.](figures/crash-trends.png)  
 
-![**Figure 2a:** Annual crash counts comparing all crashes with those involving bicycles or pedestrians.](figures/crash-trends.png)
+A heat density map (**Figure 6**) highlights clusters of bicycle and pedestrian-involved crashes across Portland, with concentrations most evident in the downtown core and along key corridors extending into outer neighborhoods. This visualization establishes a baseline view of where crashes are most frequent and sets the stage for examining how infrastructure and speed environments relate to these patterns.  
 
-Similarly, Figure 2b illustrates the distribution of injury severity levels for all crashes compared to those involving bicycles or pedestrians.
+<iframe src="figures/heat-density.html" width="100%" height="600px" style="border:none;"></iframe>  
+**Figure 6:** Heat density of bicycle and pedestrian-involved crashes across Portland.
 
-![**Figure 2b:** Distribution of injury severity levels comparing all crashes with bicycle and pedestrian-involved crashes.](figures/severity-dist.png)
+### Crash Severity  
+As shown in **Figure 7**, the distribution of injury severity shifts toward more serious outcomes for vulnerable road users. Compared to all crashes, bicycle and pedestrian-involved crashes rarely fall into the "no apparent injury/property damage only (PDO)" category and are far more likely to result in suspected minor or serious injuries, with fatalities present in smaller numbers. This pattern reflects the reality that collisions involving people on bikes or on foot almost always result in some degree of injury.
 
-### Infrastructure Coverage and Grouping
+![**Figure 7:** Injury severity distribution comparing all crashes with bicycle and pedestrian-involved crashes.](figures/severity-list.png)  
 
-Neighborhood greenways are distributed across Portland, spanning both east and west sides of the city. While coverage is denser in areas with a connected street grid, they are not limited to any single quadrant. Traffic calming features were often co-located with greenways, reinforcing their intended function as low-stress cycling routes. Over 40 percent of intersections lacked both greenways and calming features, creating a natural baseline group. 
+### Infrastructure Coverage and Grouping  
+**Figure 8** shows that most crashes occurred at intersections without bicycle-specific infrastructure, reflecting both the broader street network composition and higher exposure along non-greenway routes. Intersections with greenways or calming features represented a much smaller share of crashes, consistent with their more limited coverage across the city. When greenways and calming features did overlap, crashes were comparatively rare, underscoring their intended role as lower-stress corridors. This figure shows crash counts rather than crash rates, providing a baseline view before incorporating traffic volume in the next section.  
 
-![**Figure 3:** Crash counts by infrastructure grouping, comparing all crashes with bicycle- and pedestrian-involved crashes.](figures/infra-grouping.png)
+![**Figure 8:** Crash counts by infrastructure grouping, comparing intersections with no infrastructure to those with greenways and calming features.](figures/infra-grouping.png)  
 
 ### Crash Rates by Infrastructure and Traffic Volume  
+Crash rates per intersection were examined across combined infrastructure groupings and stratified by traffic volume tertiles. As shown in **Figure 9**, rates were substantially higher in high-volume areas overall, but intersections with calming features—particularly those paired with greenways—experienced markedly fewer crashes than those lacking interventions.  
 
-To account for differences in traffic exposure, we calculated crash rates per intersection across combined infrastructure groupings (greenways and calming features) and stratified by traffic volume tertiles (low, medium, high). As shown in Figure 4, crash rates were highest in high-volume areas, regardless of infrastructure presence. However, intersections with calming features—particularly when paired with greenways—had lower crash rates than those lacking interventions or with greenways alone within this high-volume group.  
+In medium- and low-volume areas, crash rates were much lower across all infrastructure types, and differences between groups were smaller. This suggests that infrastructure interventions may provide the greatest safety benefits where traffic exposure is highest and risk is more concentrated.  
 
-In medium- and low-volume areas, crash rates were substantially lower overall, with only minor differences between infrastructure types. This suggests that infrastructure interventions may have the greatest impact where traffic volumes, and therefore exposure risk, are highest.  
-
-![**Figure 4:** Bicycle- and pedestrian-involved crash rates per intersection by infrastructure grouping and traffic volume tertile.](figures/volume-crash.png)
+![**Figure 9:** Bicycle and pedestrian-involved crash rates per intersection by infrastructure grouping and traffic volume tertile, highlighting the stronger impact of calming features in high-volume areas.](figures/volume-crash.png)  
 
 ### Speed Environment  
+As shown in **Figure 10**, crashes on greenways are concentrated in lower speed environments, typically 20 to 25 mph, while crashes on regular streets span a wider range of posted speed limits, extending to 35 mph and above. Severe and fatal crashes are more common at the higher end of this range, reinforcing the established relationship between speed and injury severity.  
 
-Analysis of posted speed limits revealed clear differences between street types. As shown in Figure 5, greenways consistently align with lower posted speed limits, while regular streets display a broader range of speed environments. Crashes resulting in severe outcomes were concentrated at higher speed limits, underscoring the relationship between speed and injury severity.  
-
-![**Figure 5:** Posted speed limits by street type and crash severity.](figures/speed-boxplot.png)
+![**Figure 10:** Distribution of posted speed limits at crash locations by street type and crash severity, highlighting that severe crashes are concentrated at higher speeds.](figures/speed-violin.png)  
 
 ### Spatial Patterns  
+The interactive map in **Figure 11** provides a citywide view of bicycle and pedestrian-involved crashes alongside Portland’s active transportation network. The map distinguishes **Neighborhood Greenways**, **other bike facilities**, and **off-street trails**, and overlays traffic calming features to show their distribution relative to crash locations.  
 
-Mapping bicycle- and pedestrian-involved crashes alongside Portland’s greenway network and traffic calming features provided a citywide view of crash concentrations and infrastructure coverage (Figure 6).  
+<iframe src="figures/spatial-map.html" width="100%" height="600px" style="border:none;"></iframe>  
+**Figure 11:** Interactive map of bicycle and pedestrian-involved crashes, greenways, other bike facilities, off-street trails, and traffic calming features.
 
-<iframe src="figures/spatial-map.html" width="100%" height="600px" style="border:none;"></iframe>
+### Integrating Findings  
+This exploratory analysis demonstrates that bicycle and pedestrian-involved crashes are most concentrated in high-speed, high-volume corridors with limited infrastructure, while intersections with greenways, calming features, and lower speed limits see fewer and less severe crashes. These insights directly informed our modeling approach, where we tested these relationships formally while controlling for traffic exposure and environmental context.
 
-**Figure 6:** Interactive map of bicycle- and pedestrian-involved crashes, greenways, and traffic calming features.
-
-
-These exploratory findings informed our subsequent modeling strategy by highlighting key relationships between crash rates, infrastructure presence, traffic exposure, and speed environments at the intersection level. By integrating these variables into our schema and validating them through EDA, we established a foundation for statistical modeling aimed at quantifying their combined effects on bicycle- and pedestrian-involved crash risk.
 
 ## Feature Importance Analysis
 

@@ -1,12 +1,21 @@
-# Background
-Efforts to improve street safety for pedestrians and cyclists increasingly focus on the role of infrastructure design. While the addition of bicycle lanes, pedestrian crossings, and traffic calming features has become common practice in urban transportation planning, the effectiveness of such interventions depends on a range of contextual factors, including implementation quality, spatial placement, and surrounding traffic conditions.
+# Background  
 
-In Portland, Oregon, neighborhood greenways are a key component of the city’s active transportation network. These low-traffic, residential streets are intended to reduce vehicle volumes and speeds, thereby creating a safer and more comfortable environment for non-motorized users. Typical design elements include speed bumps, traffic diverters, wayfinding signage, and enhanced crossings. More broadly, traffic calming measures (such as raised crosswalks, curb extensions, and median islands) aim to moderate driver behavior and improve visibility at critical points in the street network.
+Efforts to improve street safety for pedestrians and cyclists increasingly focus on the role of infrastructure design. While adding bicycle lanes, pedestrian crossings, and traffic calming features has become common practice in urban transportation planning, the effectiveness of these interventions depends on implementation quality, placement, and surrounding traffic conditions.  
 
-Since the early 2000s, the Portland Bureau of Transportation (PBOT) has expanded its network of greenways to more than 100 miles throughout the city [@PBOTGreenways]. These efforts are integrated into broader policy initiatives, including the Vision Zero Action Plan and Safe Routes to School, which prioritize equity and the reduction of traffic-related fatalities and injuries. As part of this strategy, PBOT has also invested in targeted improvements at intersections identified as high-risk based on historical crash data [@PBOTCrashStats].
+Neighborhood greenways, introduced earlier as low-speed, low-traffic streets prioritizing people walking, biking, and rolling [@PBOTGreenways], are central to Portland’s active transportation approach. These routes rely on design elements such as speed bumps, traffic diverters, protected crossings, and wayfinding signage to create a connected, low-stress network for non-motorized travel (Figure 1).  
 
-Intersections represent a particularly hazardous component of the transportation system. Unlike midblock segments, intersections concentrate multimodal activity and conflicting movements, increasing the likelihood of collisions. A disproportionate share of serious pedestrian- and cyclist-involved crashes in Portland occurs at intersections, reinforcing the importance of evaluating safety outcomes in these locations.
+![**Figure 1:** Components of a neighborhood greenway.](figures/greenway.png)  
 
-Existing research on the safety impacts of active transportation infrastructure has produced mixed findings. While several studies report that protected bike lanes, lighting, and calming features are associated with reduced crash frequency and severity [@Reynolds2009; @Lusk2011], others emphasize the role of broader contextual variables, such as traffic volume, land use, and roadway design [@ODOTInfrastructure]. Moreover, empirical analysis is often limited by inconsistent definitions of infrastructure types, limited geographic specificity, and challenges in isolating the effects of individual treatments.
+Complementing greenways, other traffic calming measures include curb extensions, raised crosswalks, and median islands, which improve visibility, shorten crossing distances, and reduce turning speeds (Figure 2).  
 
-This study contributes to the literature by leveraging a unified, intersection-level dataset that captures both crash outcomes and multiple categories of infrastructure features in Portland from 2007 to 2022. By focusing on neighborhood greenways, traffic calming treatments, and street lighting, we seek to evaluate whether these design interventions are associated with measurable improvements in safety for vulnerable road users.
+![**Figure 2:** Curb extension in Portland’s Centennial neighborhood.](figures/curbextend.jpeg)  
+
+Protected bicycle infrastructure also plays a role. Portland employs a range of bikeway designs, from standard bike lanes to buffered, bollard-protected, and curb-protected facilities, each offering varying levels of physical separation from vehicle traffic (Figure 3).  
+
+![**Figure 3:** Examples of bike lane typologies used in Portland.](figures/bikelanes.png)  
+
+Since the early 2000s, the Portland Bureau of Transportation (PBOT) has expanded its greenway network to more than 100 miles and paired these investments with Vision Zero and Safe Routes to School initiatives [@PBOTGreenways]. These policies prioritize equitable access and the reduction of traffic-related fatalities, often focusing on high-risk intersections identified through crash data [@PBOTCrashStats].  
+
+However, existing research offers mixed findings. While several studies associate protected bike lanes, lighting, and calming measures with reduced crash rates and severity [@Reynolds2009; @Lusk2011], others emphasize broader contextual factors such as traffic volume, land use, and roadway geometry [@ODOTInfrastructure]. These gaps highlight the need for localized, high-resolution analysis.  
+
+This study addresses this gap by leveraging intersection-level crash and infrastructure data from 2007–2022 to examine how design interventions, particularly greenways and traffic calming measures, relate to safety outcomes for vulnerable road users.  
