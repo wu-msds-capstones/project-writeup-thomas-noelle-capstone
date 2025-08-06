@@ -271,7 +271,7 @@ As shown in **Figure 7**, the distribution of injury severity shifts toward more
 
 
 ### Crash Rates by Infrastructure and Traffic Volume  
-Crash rates per intersection were examined across combined infrastructure groupings and stratified by traffic volume tertiles. As shown in **Figure 9**, rates were substantially higher in high-volume areas overall, but intersections with calming features—particularly those paired with greenways—experienced markedly fewer crashes than those lacking interventions.  
+Crash rates per intersection were examined across combined infrastructure groupings and stratified by traffic volume tertiles. As shown in **Figure 9**, rates were substantially higher in high-volume areas overall, but intersections with calming features (particularly those paired with greenways) experienced markedly fewer crashes than those lacking interventions.  
 
 In medium- and low-volume areas, crash rates were much lower across all infrastructure types, and differences between groups were smaller. This suggests that infrastructure interventions may provide the greatest safety benefits where traffic exposure is highest and risk is more concentrated.  
 
