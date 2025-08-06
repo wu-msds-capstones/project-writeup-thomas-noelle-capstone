@@ -122,8 +122,8 @@ heatmap_all_visual <- heatmap_all_all + heatmap_all_inf + plot_layout(ncol = 2, 
 ```
 
 ```{r}
-#| label: figure-7a
-#| fig-cap: "**Figure 7a:** Feature importance heatmap across model configurations (all crashes)"
+#| label: figure-13a
+#| fig-cap: "**Figure 13a:** Feature importance heatmap across model configurations (all crashes)"
 #| fig-align: center
 heatmap_all_visual
 ```
@@ -132,7 +132,7 @@ When analyzing models trained on the complete crash dataset, distinct patterns e
 
 Models targeting Degree of Injury outcomes exhibit similar preferences, frequently selecting Drug Involvement and Alcohol Involvement as top-ranked features. However, both Degree of Injury and Injured vs Non-Injured models also rank road condition features such as “Road Surface – Unknown” highly, particularly in LASSO and Ridge regression. This repeated prominence suggests a potential association between uncertain or missing surface condition data and injury severity, possibly reflecting either a true risk factor or a proxy for incomplete contextual information.
 
-In contrast to the linear models, Random Forests tended to elevate numeric and continuous features such as Total Watts, Speed Limit, and Crash Hour. This divergence in feature selection likely reflects the Random Forest’s capacity to capture non-linear relationships and complex interactions that are less accessible to linear or penalized regression approaches.
+In contrast to the linear models, Random Forests tended to emphasize numeric and continuous features such as Total Watts, Speed Limit, and Crash Hour. This divergence in feature selection likely reflects the Random Forest’s capacity to capture non-linear relationships and complex interactions that are less accessible to linear or penalized regression approaches.
 
 In the models that were trained on infrastructural features only, the presence of other infrastructure features (Infrastructure Present) emerges as particularly important in predicting injury outcomes. For models predicting Fatal vs. Non-Fatal outcomes using infrastructure-only features, the Sum of Traffic Control Devices appears as the most predictive feature, suggesting a potential mitigating effect of traffic-calming infrastructure on crash fatality.
 
@@ -157,7 +157,9 @@ ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank)
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(size = 12),
     panel.grid = element_blank(),
-    legend.position = "none"
+    legend.position = "none",
+    plot.background = element_rect(fill = "#f4f8ff"),
+    legend.background = element_rect(fill = "#f4f8ff")
   )
 
 heatmap_bike_inf <- results_heatmap_infra %>% filter(`Data Subset` == "Bike") %>%
@@ -179,15 +181,17 @@ ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank)
     axis.ticks.y = element_blank(),
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(size = 12),
-    panel.grid = element_blank()
+    panel.grid = element_blank(),
+    plot.background = element_rect(fill = "#f4f8ff"),
+    legend.background = element_rect(fill = "#f4f8ff")
   )
 
 heatmap_bike_visual <- heatmap_bike_all + heatmap_bike_inf + plot_layout(ncol = 2, widths = c(2.25, 0.75))
 ```
 
 ```{r}
-#| label: figure-7b
-#| fig-cap: "**Figure 7b:** Feature importance heatmap across model configurations (bicycle crashes)"
+#| label: figure-13b
+#| fig-cap: "**Figure 13b:** Feature importance heatmap across model configurations (bicycle crashes)"
 #| fig-align: center
 heatmap_bike_visual
 ```
@@ -220,7 +224,9 @@ ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank)
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(size = 12),
     panel.grid = element_blank(),
-    legend.position = "none"
+    legend.position = "none",
+    plot.background = element_rect(fill = "#f4f8ff"),
+    legend.background = element_rect(fill = "#f4f8ff")
   )
 
 heatmap_ped_inf <- results_heatmap_infra %>% filter(`Data Subset` == "Ped") %>%
@@ -242,15 +248,17 @@ ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank)
     axis.ticks.y = element_blank(),
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(size = 12),
-    panel.grid = element_blank()
+    panel.grid = element_blank(),
+    plot.background = element_rect(fill = "#f4f8ff"),
+    legend.background = element_rect(fill = "#f4f8ff")
   )
 
 heatmap_ped_visual <- heatmap_ped_all + heatmap_ped_inf + plot_layout(ncol = 2, widths = c(2.1, 0.9))
 ```
 
 ```{r}
-#| label: figure-7c
-#| fig-cap: "**Figure 7c:** Feature importance heatmap across model configurations (pedestrian crashes)"
+#| label: figure-13c
+#| fig-cap: "**Figure 13c:** Feature importance heatmap across model configurations (pedestrian crashes)"
 #| fig-align: center
 heatmap_ped_visual
 ```
@@ -262,7 +270,7 @@ While no dominant pattern emerges in the Injured vs. Non-Injured models, certain
 In the infrastructure-only models, Bike Lane presence emerges as a leading predictor in Degree of Injury models using logistic regression, with broader infrastructure presence indicators following closely. In the Injured vs. Non-Injured models, the Sum of Traffic Calming Devices appears again as a contributing feature. For Fatal vs. Non-Fatal predictions, Speed Limit is the most significant predictor in logistic regression models and ranks second in Random Forest models. Total Watts also appears consistently across all three target outcomes, underscoring the potential role of visibility and lighting in pedestrian crash severity.
 
 ## Summary of Results
-Taken together, the results across all crash types and modeling configurations reveal several consistent insights into the factors most associated with crash severity. Behavioral factors, particularly drug involvement, emerge as the most influential predictors of fatal outcomes across all road user types. This pattern is especially pronounced in regularized models, where marijuana involvement also consistently appears as a top predictor in pedestrian crashes. Alcohol involvement and crash speed also follow closely.
+Taken together, the results across all crash types and modeling configurations reveal several consistent insights into the factors most associated with crash severity. Behavioral factors, particularly drug involvement, emerge as the most influential predictors of fatal outcomes across all road user types. This pattern is especially pronounced in regularized models, where alcohol involvement and crash speed consistently appear as a top predictor.
 
 Across degree of injury and injury vs. non-injury outcomes, the influence of environmental and contextual features becomes more apparent. Variables such as road surface conditions (especially when unknown or icy), lighting conditions (Total Watts), and crash timing (Crash Hour) rank highly, particularly in Random Forest models capable of capturing non-linear interactions. Notably, road surface unknown appears prominently in linear models, raising the possibility that data gaps or ambiguous reporting may be correlated with crash severity.
 
