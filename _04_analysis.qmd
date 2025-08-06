@@ -326,11 +326,11 @@ For the third target, we group the injury types shown in Figure 2b into two broa
 
 Although all three targets serve as proxies for crash severity, each provides a unique lens for analysis. For instance, fatal crashes are rare but socially critical, while the injury-based targets may capture broader systemic risk patterns across road users.
 
-Because all three targets exhibit varying degrees of class imbalance, particularly fatal crashes, model interpretation must be situated within the context of imbalanced learning. Figure [X] presents the distribution of each crash severity target by road user type to illustrate the degree of imbalance across populations.
+Because all three targets exhibit varying degrees of class imbalance, particularly fatal crashes, model interpretation must be situated within the context of imbalanced learning. Figure 12 presents the distribution of each crash severity target by road user type to illustrate the degree of imbalance across populations.
 
 ```{r}
-#| label: figure-6
-#| fig-cap: "Proportion of Road User Crash Outcome by Type"
+#| label: figure-12
+#| fig-cap: "**Figure 12:** Proportion of Road User Crash Outcome by Type"
 #| fig-align: center
 crashes_predictors %>% 
   select(fatal, injured, major, bike_flg, ped_flg) %>%
@@ -363,10 +363,10 @@ crashes_predictors %>%
          y = "",
          fill = "Flag (True = Belongs to Target Category)") +
     scale_y_continuous(labels = scales::percent_format()) +
-    scale_fill_manual(values = c("skyblue2", "red2")) +
+    scale_fill_manual(values = c("#4682b4", "#228b22")) +
     geom_text(
       aes(y = label_position, label = label_text),
-      color = "black",
+      color = "white",
       size = 3.5,
       position = "identity"
     ) +

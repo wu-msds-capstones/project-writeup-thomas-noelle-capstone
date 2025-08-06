@@ -4,19 +4,33 @@ Below is the full results table aggregated from every combination of model used:
 
 ```{r}
 library(DT)
-datatable(
-  results_agg,
-  options = list(
-    paging = FALSE,
-    scrollY = "400px",
-    scrollX = TRUE,       
-    scrollCollapse = TRUE,
-    autoWidth = TRUE,
-    fixedHeader = TRUE 
-  ),
-  class = "nowrap stripe",
-  escape = FALSE
-) %>%
-  formatRound(columns = which(sapply(results_agg, is.numeric)), digits = 4)
+library(htmltools)
+tagList(
+  tags$style(HTML("
+    table.dataTable {
+      font-size: 12px;
+    }
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+      font-size: 12px;
+    }
+  ")),
+  datatable(
+    results_agg,
+    options = list(
+      paging = FALSE,
+      scrollY = "400px",
+      scrollX = TRUE,       
+      scrollCollapse = TRUE,
+      autoWidth = TRUE,
+      fixedHeader = TRUE 
+    ),
+    class = "nowrap stripe",
+    escape = FALSE
+  ) %>%
+    formatRound(columns = which(sapply(results_agg, is.numeric)), digits = 4)
+)
 ```
 
