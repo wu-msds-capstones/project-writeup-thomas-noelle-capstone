@@ -157,9 +157,7 @@ ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank)
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(size = 12),
     panel.grid = element_blank(),
-    legend.position = "none",
-    plot.background = element_rect(fill = "#f4f8ff"),
-    legend.background = element_rect(fill = "#f4f8ff")
+    legend.position = "none"
   )
 
 heatmap_bike_inf <- results_heatmap_infra %>% filter(`Data Subset` == "Bike") %>%
@@ -181,9 +179,7 @@ ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank)
     axis.ticks.y = element_blank(),
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(size = 12),
-    panel.grid = element_blank(),
-    plot.background = element_rect(fill = "#f4f8ff"),
-    legend.background = element_rect(fill = "#f4f8ff")
+    panel.grid = element_blank()
   )
 
 heatmap_bike_visual <- heatmap_bike_all + heatmap_bike_inf + plot_layout(ncol = 2, widths = c(2.25, 0.75))
@@ -224,9 +220,7 @@ ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank)
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(size = 12),
     panel.grid = element_blank(),
-    legend.position = "none",
-    plot.background = element_rect(fill = "#f4f8ff"),
-    legend.background = element_rect(fill = "#f4f8ff")
+    legend.position = "none"
   )
 
 heatmap_ped_inf <- results_heatmap_infra %>% filter(`Data Subset` == "Ped") %>%
@@ -248,9 +242,7 @@ ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank)
     axis.ticks.y = element_blank(),
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(size = 12),
-    panel.grid = element_blank(),
-    plot.background = element_rect(fill = "#f4f8ff"),
-    legend.background = element_rect(fill = "#f4f8ff")
+    panel.grid = element_blank()
   )
 
 heatmap_ped_visual <- heatmap_ped_all + heatmap_ped_inf + plot_layout(ncol = 2, widths = c(2.1, 0.9))
