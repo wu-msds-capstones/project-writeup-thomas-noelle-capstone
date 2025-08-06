@@ -1,3 +1,7 @@
+# Abstract
+
+This study examines how neighborhood greenways, traffic calming features, and related infrastructure influence crash severity for cyclists and pedestrians in Portland, Oregon. We integrated crash data from 2007–2022 with infrastructure, traffic, and environmental datasets to build a normalized intersection-level database. Exploratory analysis showed that crashes involving vulnerable road users were concentrated in high-speed, high-volume corridors without dedicated infrastructure, while intersections with greenways, calming devices, and lower speed limits experienced fewer and less severe crashes. Classification models identified behavioral factors such as drug and alcohol involvement as leading predictors of fatal outcomes, while infrastructure features including lighting, speed limits, and traffic calming devices were strongly associated with injury severity. These findings highlight the combined importance of behavioral interventions and targeted infrastructure investment in reducing crash risk and support data-driven strategies aligned with Portland’s Vision Zero goals.
+
 # Introduction
 
 Cities across the United States are reimagining their streets to support safer, more sustainable modes of transportation. As communities work to reduce traffic-related injuries, lower greenhouse gas emissions, and promote active lifestyles, the design of streets for non-motorized users has become central to urban planning.
