@@ -322,7 +322,7 @@ The target variable, crash severity, can be framed in a variety of different but
 
 **Major Injury Crash**: whether the crash resulted in a severe injury, based on a consolidated classification.
 
-For the third target, we group the injury types shown in Figure 2b into two broader categories: major injuries, comprising "Fatal Injury," "Suspected Serious Injury," and "Suspected Minor Injury"; and minor or no injuries, comprising "Possible Injury" and "No Apparent Injury." This aggregation reflects a simplified but relevant distinction between more and less severe injury outcomes.
+For the third target, we group the injury types shown in Figure 7 into two broader categories: major injuries, comprising "Fatal Injury," "Suspected Serious Injury," and "Suspected Minor Injury"; and minor or no injuries, comprising "Possible Injury" and "No Apparent Injury." This aggregation reflects a simplified but relevant distinction between more and less severe injury outcomes.
 
 Although all three targets serve as proxies for crash severity, each provides a unique lens for analysis. For instance, fatal crashes are rare but socially critical, while the injury-based targets may capture broader systemic risk patterns across road users.
 
