@@ -56,69 +56,204 @@ results_heatmap$Feature <- factor(results_heatmap$Feature, levels = c(
   # Other
   "Crash Hour", "Weekday"
 ))
-results_heatmap$Model_ID <- factor(results_heatmap$Model_ID, levels = c(
-  "Logistic - Injured vs Non-Injured", "LASSO - Injured vs Non-Injured", 
-  "Ridge - Injured vs Non-Injured",  "Random Forest - Injured vs Non-Injured", 
-  "Logistic - Degree of Injury", "LASSO - Degree of Injury", 
-  "Ridge - Degree of Injury", "Random Forest - Degree of Injury",
-  "Logistic - Fatal vs Non-Fatal", "LASSO - Fatal vs Non-Fatal", 
-  "Ridge - Fatal vs Non-Fatal", "Random Forest - Fatal vs Non-Fatal"
-))
-results_heatmap_infra$Model_ID <- factor(results_heatmap_infra$Model_ID, levels = c(
-  "Logistic - Injured vs Non-Injured", "LASSO - Injured vs Non-Injured", 
-  "Ridge - Injured vs Non-Injured",  "Random Forest - Injured vs Non-Injured", 
-  "Logistic - Degree of Injury", "LASSO - Degree of Injury", 
-  "Ridge - Degree of Injury", "Random Forest - Degree of Injury",
-  "Logistic - Fatal vs Non-Fatal", "LASSO - Fatal vs Non-Fatal", 
-  "Ridge - Fatal vs Non-Fatal", "Random Forest - Fatal vs Non-Fatal"
+results_heatmap_infra$Feature <- factor(results_heatmap_infra$Feature, levels = c(
+  "Total Watts", "Speed Limit", "Sum Traffic Calming Devices", "Infrastructure Present", "Bike Lane"
 ))
 ```
 
 ## Modeling Results - All Crashes
 ```{r}
-heatmap_all_all <- results_heatmap %>% filter(`Data Subset` == "All") %>%
-ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
-  geom_tile(color = "white") +
-  scale_fill_manual(
-    values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
-    name = "Rank"
-  ) +
-  labs(
-    title = "All Predictors",
-    x = "Top Features",
-    y = "Model Configuration"
-  ) +
-  theme_bw(base_size = 12) +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(size = 12),
-    panel.grid = element_blank(),
-    legend.position = "none"
-  )
+results_heatmap_all <- results_heatmap %>%
+  filter(`Data Subset` == "All")
+results_all_features <- results_heatmap_all %>%
+  pull(Feature) %>%
+  unique()
+results_heatmap_all <- results_heatmap_all %>%
+  mutate(Feature = factor(Feature, levels = levels(droplevels(results_all_features))))
 
-heatmap_all_inf <- results_heatmap_infra %>% filter(`Data Subset` == "All") %>%
-ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
-  geom_tile(color = "white") +
-  scale_fill_manual(
-    values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
-    name = "Rank"
-  ) +
-  scale_y_discrete(drop = FALSE) +
-  labs(
-    title = "Infrastructure",
-    x = "",
-    y = ""
-  ) +
-  theme_bw(base_size = 12) +
-  theme(
-    axis.text.y = element_blank(),
-    axis.ticks.y = element_blank(),
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(size = 12),
-    panel.grid = element_blank()
-  )
+results_heatmap_all_infra <- results_heatmap_infra %>%
+  filter(`Data Subset` == "All")
+results_all_features_infra <- results_heatmap_all_infra %>%
+  pull(Feature) %>%
+  unique()
+results_heatmap_all_infra <- results_heatmap_all_infra %>%
+  mutate(Feature = factor(Feature, levels = levels(results_all_features_infra)))
 
-heatmap_all_visual <- heatmap_all_all + heatmap_all_inf + plot_layout(ncol = 2, widths = c(2, 1))
+inj_levels <- c(
+  "Logistic - Injured vs Non-Injured", "LASSO - Injured vs Non-Injured", 
+  "Ridge - Injured vs Non-Injured",  "Random Forest - Injured vs Non-Injured"
+)
+deg_levels <- c(
+  "Logistic - Degree of Injury", "LASSO - Degree of Injury", 
+  "Ridge - Degree of Injury", "Random Forest - Degree of Injury"
+)
+ftl_levels <- c(
+  "Logistic - Fatal vs Non-Fatal", "LASSO - Fatal vs Non-Fatal", 
+  "Ridge - Fatal vs Non-Fatal", "Random Forest - Fatal vs Non-Fatal"
+)
+
+heatmap_all_all1 <- results_heatmap_all %>% 
+  filter(`Target Variable` == "Injured vs Non-Injured") %>%
+  mutate(Model_ID = factor(Model_ID, levels = inj_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    labs(
+      title = "All Predictors",
+      x = "",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_all_all2 <- results_heatmap_all %>% 
+  filter(`Target Variable` == "Degree of Injury") %>%
+  mutate(Model_ID = factor(Model_ID, levels = deg_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    labs(
+      title = "",
+      x = "",
+      y = "Model Configuration"
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_all_all3 <- results_heatmap_all %>%
+  filter(`Target Variable` == "Fatal vs Non-Fatal") %>%
+  mutate(Model_ID = factor(Model_ID, levels = ftl_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    labs(
+      title = "",
+      x = "Top Features",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_all_inf1 <- results_heatmap_all_infra %>% 
+  filter(`Target Variable` == "Injured vs Non-Injured") %>%
+  mutate(Model_ID = factor(Model_ID, levels = inj_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    scale_y_discrete(drop = FALSE) +
+    labs(
+      title = "Infrastructure",
+      x = "",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_all_inf2 <- results_heatmap_all_infra %>% 
+  filter(`Target Variable` == "Degree of Injury") %>%
+  mutate(Model_ID = factor(Model_ID, levels = deg_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    scale_y_discrete(drop = FALSE) +
+    labs(
+      title = "",
+      x = "",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank()
+    )
+
+heatmap_all_inf3 <- results_heatmap_all_infra %>%
+  filter(`Target Variable` == "Fatal vs Non-Fatal") %>%
+  mutate(Model_ID = factor(Model_ID, levels = ftl_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    scale_y_discrete(drop = FALSE) +
+    labs(
+      title = "",
+      x = "",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_all_visual <- (
+  heatmap_all_all1 + plot_spacer() + heatmap_all_inf1 +
+  plot_spacer() + plot_spacer() + plot_spacer() +
+  heatmap_all_all2 + plot_spacer() + heatmap_all_inf2 +
+  plot_spacer() + plot_spacer() + plot_spacer() +
+  heatmap_all_all3 + plot_spacer() + heatmap_all_inf3
+) +
+  plot_layout(
+    ncol = 3,
+    widths = c(2, -0.4, 1),
+    heights = c(0.5, -0.51, 0.5, -0.51, 0.5)
+  )
 ```
 
 ```{r}
@@ -139,50 +274,185 @@ In the models that were trained on infrastructural features only, the presence o
 
 ## Modeling Results - Bicycle Only Crashes
 ```{r}
-heatmap_bike_all <- results_heatmap %>% filter(`Data Subset` == "Bike") %>%
-ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
-  geom_tile(color = "white") +
-  scale_fill_manual(
-    values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
-    name = "Rank"
-  ) +
-  scale_y_discrete(drop = FALSE) +
-  labs(
-    title = "All Predictors",
-    x = "Top Features",
-    y = "Model Configuration"
-  ) +
-  theme_bw(base_size = 12) +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(size = 12),
-    panel.grid = element_blank(),
-    legend.position = "none"
-  )
+results_heatmap_bike <- results_heatmap %>%
+  filter(`Data Subset` == "Bike")
+results_bike_features <- results_heatmap_bike %>%
+  pull(Feature) %>%
+  unique()
+results_heatmap_bike <- results_heatmap_bike %>%
+  mutate(Feature = factor(Feature, levels = levels(droplevels(results_bike_features))))
 
-heatmap_bike_inf <- results_heatmap_infra %>% filter(`Data Subset` == "Bike") %>%
-ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
-  geom_tile(color = "white") +
-  scale_fill_manual(
-    values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
-    name = "Rank"
-  ) +
-  scale_y_discrete(drop = FALSE) +
-  labs(
-    title = "Infrastructure",
-    x = "",
-    y = ""
-  ) +
-  theme_bw(base_size = 12) +
-  theme(
-    axis.text.y = element_blank(),
-    axis.ticks.y = element_blank(),
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(size = 12),
-    panel.grid = element_blank()
-  )
+results_heatmap_bike_infra <- results_heatmap_infra %>%
+  filter(`Data Subset` == "Bike")
+results_bike_features_infra <- results_heatmap_bike_infra %>%
+  pull(Feature) %>%
+  unique()
+results_heatmap_bike_infra <- results_heatmap_bike_infra %>%
+  mutate(Feature = factor(Feature, levels = levels(results_bike_features_infra)))
 
-heatmap_bike_visual <- heatmap_bike_all + heatmap_bike_inf + plot_layout(ncol = 2, widths = c(2.25, 0.75))
+heatmap_bike_all1 <- results_heatmap_bike %>% 
+  filter(`Target Variable` == "Injured vs Non-Injured") %>%
+  mutate(Model_ID = factor(Model_ID, levels = inj_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    scale_y_discrete(drop = FALSE) +
+    labs(
+      title = "All Predictors",
+      x = "",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_bike_all2 <- results_heatmap_bike %>% 
+  filter(`Target Variable` == "Degree of Injury") %>%
+  mutate(Model_ID = factor(Model_ID, levels = deg_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    labs(
+      title = "",
+      x = "",
+      y = "Model Configuration"
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_bike_all3 <- results_heatmap_bike %>%
+  filter(`Target Variable` == "Fatal vs Non-Fatal") %>%
+  mutate(Model_ID = factor(Model_ID, levels = ftl_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    labs(
+      title = "",
+      x = "Top Features",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_bike_inf1 <- results_heatmap_bike_infra %>% 
+  filter(`Target Variable` == "Injured vs Non-Injured") %>%
+  mutate(Model_ID = factor(Model_ID, levels = inj_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    scale_y_discrete(drop = FALSE) +
+    labs(
+      title = "Infrastructure",
+      x = "",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_bike_inf2 <- results_heatmap_bike_infra %>% 
+  filter(`Target Variable` == "Degree of Injury") %>%
+  mutate(Model_ID = factor(Model_ID, levels = deg_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    scale_y_discrete(drop = FALSE) +
+    labs(
+      title = "",
+      x = "",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank()
+    )
+
+heatmap_bike_inf3 <- results_heatmap_bike_infra %>%
+  filter(`Target Variable` == "Fatal vs Non-Fatal") %>%
+  mutate(Model_ID = factor(Model_ID, levels = ftl_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    scale_y_discrete(drop = FALSE) +
+    labs(
+      title = "",
+      x = "",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_bike_visual <- (
+  heatmap_bike_all1 + plot_spacer() + heatmap_bike_inf1 +
+  plot_spacer() + plot_spacer() + plot_spacer() +
+  heatmap_bike_all2 + plot_spacer() + heatmap_bike_inf2 +
+  plot_spacer() + plot_spacer() + plot_spacer() +
+  heatmap_bike_all3 + plot_spacer() + heatmap_bike_inf3
+) +
+  plot_layout(
+    ncol = 3,
+    widths = c(2.2, -0.4, 0.8),
+    heights = c(0.5, -0.51, 0.5, -0.51, 0.5)
+  )
 ```
 
 ```{r}
@@ -202,50 +472,185 @@ In contrast, the infrastructure-only models for bicycle crashes do not reveal st
 
 ## Modeling Results - Pedestrian Only Crashes
 ```{r}
-heatmap_ped_all <- results_heatmap %>% filter(`Data Subset` == "Ped") %>%
-ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
-  geom_tile(color = "white") +
-  scale_fill_manual(
-    values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
-    name = "Rank"
-  ) +
-  scale_y_discrete(drop = FALSE) +
-  labs(
-    title = "All Predictors",
-    x = "Top Features",
-    y = "Model Configuration"
-  ) +
-  theme_bw(base_size = 12) +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(size = 12),
-    panel.grid = element_blank(),
-    legend.position = "none"
-  )
+results_heatmap_ped <- results_heatmap %>%
+  filter(`Data Subset` == "Ped")
+results_ped_features <- results_heatmap_ped %>%
+  pull(Feature) %>%
+  unique()
+results_heatmap_ped <- results_heatmap_ped %>%
+  mutate(Feature = factor(Feature, levels = levels(droplevels(results_ped_features))))
 
-heatmap_ped_inf <- results_heatmap_infra %>% filter(`Data Subset` == "Ped") %>%
-ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
-  geom_tile(color = "white") +
-  scale_fill_manual(
-    values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
-    name = "Rank"
-  ) +
-  scale_y_discrete(drop = FALSE) +
-  labs(
-    title = "Infrastructure",
-    x = "",
-    y = ""
-  ) +
-  theme_bw(base_size = 12) +
-  theme(
-    axis.text.y = element_blank(),
-    axis.ticks.y = element_blank(),
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(size = 12),
-    panel.grid = element_blank()
-  )
+results_heatmap_ped_infra <- results_heatmap_infra %>%
+  filter(`Data Subset` == "Ped")
+results_ped_features_infra <- results_heatmap_ped_infra %>%
+  pull(Feature) %>%
+  unique()
+results_heatmap_ped_infra <- results_heatmap_ped_infra %>%
+  mutate(Feature = factor(Feature, levels = levels(results_ped_features_infra)))
 
-heatmap_ped_visual <- heatmap_ped_all + heatmap_ped_inf + plot_layout(ncol = 2, widths = c(2.1, 0.9))
+heatmap_ped_all1 <- results_heatmap_ped %>% 
+  filter(`Target Variable` == "Injured vs Non-Injured") %>%
+  mutate(Model_ID = factor(Model_ID, levels = inj_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    scale_y_discrete(drop = FALSE) +
+    labs(
+      title = "All Predictors",
+      x = "",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_ped_all2 <- results_heatmap_ped %>% 
+  filter(`Target Variable` == "Degree of Injury") %>%
+  mutate(Model_ID = factor(Model_ID, levels = deg_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    labs(
+      title = "",
+      x = "",
+      y = "Model Configuration"
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_ped_all3 <- results_heatmap_ped %>%
+  filter(`Target Variable` == "Fatal vs Non-Fatal") %>%
+  mutate(Model_ID = factor(Model_ID, levels = ftl_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    labs(
+      title = "",
+      x = "Top Features",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_ped_inf1 <- results_heatmap_ped_infra %>% 
+  filter(`Target Variable` == "Injured vs Non-Injured") %>%
+  mutate(Model_ID = factor(Model_ID, levels = inj_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    scale_y_discrete(drop = FALSE) +
+    labs(
+      title = "Infrastructure",
+      x = "",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_ped_inf2 <- results_heatmap_ped_infra %>% 
+  filter(`Target Variable` == "Degree of Injury") %>%
+  mutate(Model_ID = factor(Model_ID, levels = deg_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    scale_y_discrete(drop = FALSE) +
+    labs(
+      title = "",
+      x = "",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank(),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank()
+    )
+
+heatmap_ped_inf3 <- results_heatmap_ped_infra %>%
+  filter(`Target Variable` == "Fatal vs Non-Fatal") %>%
+  mutate(Model_ID = factor(Model_ID, levels = ftl_levels)) %>%
+  ggplot(aes(x = Feature, y = fct_rev(Model_ID), fill = as.factor(Importance_Rank))) +
+    geom_tile(color = "white") +
+    scale_fill_manual(
+      values = c("1" = "#1b9e77", "2" = "#d95f13", "3" = "#7570b3"),
+      name = "Rank"
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    scale_y_discrete(drop = FALSE) +
+    labs(
+      title = "",
+      x = "",
+      y = ""
+    ) +
+    theme_bw(base_size = 12) +
+    theme(
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      plot.title = element_text(size = 12),
+      panel.grid = element_blank(),
+      legend.position = "none"
+    )
+
+heatmap_ped_visual <- (
+  heatmap_ped_all1 + plot_spacer() + heatmap_ped_inf1 +
+  plot_spacer() + plot_spacer() + plot_spacer() +
+  heatmap_ped_all2 + plot_spacer() + heatmap_ped_inf2 +
+  plot_spacer() + plot_spacer() + plot_spacer() +
+  heatmap_ped_all3 + plot_spacer() + heatmap_ped_inf3
+) +
+  plot_layout(
+    ncol = 3,
+    widths = c(2.17, -0.4, 0.83),
+    heights = c(0.5, -0.575, 0.5, -0.575, 0.5)
+  )
 ```
 
 ```{r}
