@@ -280,7 +280,7 @@ In medium- and low-volume areas, crash rates were much lower across all infrastr
 
 
 ### Speed Environment  
-As shown in **Figure 10**, crashes on greenways are concentrated in lower speed environments, typically 20 to 25 mph, while crashes on regular streets span a wider range of posted speed limits, extending to 35 mph and above. Severe and fatal crashes are more common at the higher end of this range, reinforcing the established relationship between speed and injury severity.  
+As shown in **Figure 10**, crashes on greenways are concentrated in lower speed environments, typically 20 to 25 mph, while crashes on regular streets span a wider range of posted speed limits, extending to 35 mph and above. Severe and fatal crashes are more common at the higher end of this range, reinforcing the established relationship between speed and injury severity. A small number of records show unusually low or zero posted speeds, generally reflecting locations such as alleys, parking lots, or other non-standard roadways.    
 
 ![**Figure 10:** Distribution of posted speed limits at crash locations by street type and crash severity, highlighting that severe crashes are concentrated at higher speeds.](figures/speed-violin.png)  
 
