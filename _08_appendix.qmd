@@ -3,8 +3,6 @@
 Below is the full results table aggregated from every combination of model used:
 
 ```{r}
-library(DT)
-library(htmltools)
 tagList(
   tags$style(HTML("
     table.dataTable {
