@@ -322,11 +322,11 @@ The target variable, crash severity, can be framed in a variety of different but
 
 **Major Injury Crash**: whether the crash resulted in a severe injury, based on a consolidated classification.
 
-For the third target, we group the injury types shown in Figure 7 into two broader categories: major injuries, comprising "Fatal Injury," "Suspected Serious Injury," and "Suspected Minor Injury"; and minor or no injuries, comprising "Possible Injury" and "No Apparent Injury." This aggregation reflects a simplified but relevant distinction between more and less severe injury outcomes.
+For the third target, we group the injury types shown in **Figure 7** into two broader categories: major injuries, comprising "Fatal Injury," "Suspected Serious Injury," and "Suspected Minor Injury"; and minor or no injuries, comprising "Possible Injury" and "No Apparent Injury." This aggregation reflects a simplified but relevant distinction between more and less severe injury outcomes.
 
 Although all three targets serve as proxies for crash severity, each provides a unique lens for analysis. For instance, fatal crashes are rare but socially critical, while the injury-based targets may capture broader systemic risk patterns across road users.
 
-Because all three targets exhibit varying degrees of class imbalance, particularly fatal crashes, model interpretation must be situated within the context of imbalanced learning. Figure 12 presents the distribution of each crash severity target by road user type to illustrate the degree of imbalance across populations.
+Because all three targets exhibit varying degrees of class imbalance, particularly fatal crashes, model interpretation must be situated within the context of imbalanced learning. **Figure 12** presents the distribution of each crash severity target by road user type to illustrate the degree of imbalance across populations.
 
 ```{r}
 #| label: figure-12
@@ -337,11 +337,11 @@ crashes_predictors %>%
   pivot_longer(cols = c(fatal, injured, major),
                names_to = "Target",
                values_to = "Target_Flag") %>%
-  mutate(`Road User Type` = case_when(
+  mutate(`Road User Type` = factor(case_when(
     bike_flg == "Yes" ~ "Bike",
     ped_flg == "Yes" ~ "Pedestrian",
     TRUE ~ "Motorist"
-  )) %>%
+  ), levels = c("Motorist", "Bike", "Pedestrian"))) %>%
   group_by(Target, `Road User Type`, Target_Flag) %>%
   summarize(n = n(), .groups = "drop") %>%
   group_by(Target, `Road User Type`) %>%
@@ -394,6 +394,135 @@ Given the complexity and variation across road users and crash severity outcomes
 While models with all predictors allow for a more complete understanding of the multifaceted contributors of crash severity, they may also incorporate variables that are less actionable from a planning or policy standpoint. In contrast, infrastructure-only models are designed to isolate the influence of modifiable aspects of the built environment, which are most relevant to decision-makers in transportation planning and roadway design.
 
 By comparing the feature importance outputs from these two model types, we can assess the extent to which crash severity can be explained by infrastructure alone, versus more complex contextual or behavioral variables. This dual approach supports both broad analytical insight and practical, intervention-oriented recommendations.
+
+Below, **Table 1** and **Table 2** describe the sets of predictors that were used in the modeling process.
+
+```{r}
+library(DT)
+library(htmltools)
+all_predictors <- data.frame(
+  Predictor = c(
+    "Alcohol Involved",
+    "Drugs Invovled",
+    "Marijuana Involved",
+    "Crash Speed Involved",
+    "Hit and Run",
+    "Intersection Type",
+    "Road Surface",
+    "Road Character",
+    "Weather Condition",
+    "Light Condition",
+    "Total Watts",
+    "Speed Limit",
+    "Sum Traffic Calming Devices",
+    "Infrastructure Present",
+    "Bike Lane",
+    "Crash Hour",
+    "Weekday"
+  ),
+  Description = c(
+    "Flag indicating whether an active participant in the crash had been using alcohol.",
+    "Flag indicating whether an active participant in the crash had used drugs.",
+    "Flag indicating whether an active participant in the crash had been using marijuana.",
+    "Flag indicating whether or not a driver involved in the crash was exceeding the posted speed, driving too fast for conditions, or speed racing.",
+    "Flag indicating whether the vehicle operator fled the scene of the crash.",
+    "category indicating the way in which two or more roads meet or cross.",
+    "Category indicating the condition of the travel lanes at the time of the crash.",
+    "Category indicating  the alignment, contour, structure, or other distinctive feature that describes the
+roadway at the crash location.",
+    "Category indicating the atmospheric conditions at the time of the crash.",
+    "Category indicating the amount of ambient light available at the time of the crash.",
+    "Integer indicating the sum of power generated in watts by all surrounding street lights in a given intersection.",
+    "Integer indicating the posted closest speed limit to the crash intersection.",
+    "Integer indicating the sum of roadway traffic calming features (speed bumps, raised crosswalks, rumble strips, and textured crosswalks).",
+    "Flag indicating whether an infrastructural feature is present (Neighborhood Greenway, other types of bike lanes, Enhanced Shared Roadways).",
+    "Flag indicating whether a bike lane was present.",
+    "Integer indicating the hour of the crash (Initial modeling showed negligible performance differences between numeric coding and categorical binning).",
+    "Integer indicating the day of the week of the crash (Initial modeling showed negligible performance differences between numeric and categorical coding)."
+  )
+)
+inf_predictors <- data.frame(
+  Predictor = c(
+    "Total Watts",
+    "Speed Limit",
+    "Sum Traffic Calming Devices",
+    "Infrastructure Present",
+    "Bike Lane"
+  ),
+  Description = c(
+    "Integer indicating the sum of power generated in watts by all surrounding street lights in a given intersection.",
+    "Integer indicating the posted closest speed limit to the crash intersection.",
+    "Integer indicating the sum of roadway traffic calming features (speed bumps, raised crosswalks, rumble strips, and textured crosswalks).",
+    "Flag indicating whether an infrastructural feature is present (Neighborhood Greenway, other types of bike lanes, Enhanced Shared Roadways).",
+    "Flag indicating whether a bike lane was present."
+  )
+)
+```
+
+
+```{r}
+#| label: table-1
+#| fig-cap: "**Table 1:** Description of all predictors used in models."
+#| fig-align: center
+tagList(
+  tags$style(HTML("
+    table.dataTable {
+      font-size: 12px;
+    }
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+      font-size: 12px;
+    }
+  ")),
+  datatable(
+    all_predictors,
+    options = list(
+      paging = FALSE,
+      searching = FALSE,
+      scrollY = "400px",
+      scrollX = TRUE,       
+      scrollCollapse = TRUE,
+      autoWidth = TRUE,
+      fixedHeader = TRUE 
+    ),
+    class = "nowrap stripe",
+    escape = FALSE
+  ))
+```
+
+```{r}
+#| label: table-2
+#| fig-cap: "**Table 2:** Description of infrastructural predictors used in models."
+#| fig-align: center
+tagList(
+  tags$style(HTML("
+    table.dataTable {
+      font-size: 12px;
+    }
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+      font-size: 12px;
+    }
+  ")),
+  datatable(
+    inf_predictors,
+    options = list(
+      paging = FALSE,
+      searching = FALSE,
+      scrollY = "400px",
+      scrollX = TRUE,       
+      scrollCollapse = TRUE,
+      autoWidth = TRUE,
+      fixedHeader = TRUE 
+    ),
+    class = "nowrap stripe",
+    escape = FALSE
+  ))
+```
 
 ### Modeling
 
