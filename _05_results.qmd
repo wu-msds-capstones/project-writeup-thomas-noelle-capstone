@@ -2,10 +2,6 @@
 
 This section presents the results of our classification models across combinations of crash types (all, bicycle-involved, pedestrian-involved), outcome variables (fatal, injury, major injury), predictor sets (all features, infrastructure-only), and modeling approaches (Logistic Regression, LASSO, Ridge, Random Forest). Our focus is on model interpretability, with an emphasis on feature importance rankings rather than predictive performance alone. Cohen’s Kappa is used as the primary evaluation metric due to class imbalance. For each modeling configuration, we report predictive agreement and the top three contributing features. A detailed table view is presented in the Appendix.
 
-Some of the models have more than one feature per a particular rank in the top three. These are ties based on the most common occurrence among the five model runs that were completed. 
-
-The LASSO model has the power to shrink some coefficients on predictors to zero. If this occurs for every predictor in the dataset, then no features will show up in the top three. This occurs in some of the bike/pedestrian data subsets.
-
 ```{r}
 library(patchwork)
 results_agg <- read_csv("data/modeling_results_agg.csv")
@@ -62,6 +58,12 @@ results_heatmap_infra$Feature <- factor(results_heatmap_infra$Feature, levels = 
 ```
 
 ## Modeling Results - All Crashes
+The below figures displays heatmaps of the ranks of each feature per a particular model. The left side of the plot shows the results for the models trained on all predictors, and the right side of the plot shows the results for the models trained on only the infrastructural predictors. If none of the models had a predictor ranked in its top three most important features, it was not included in the visual. As an example, in **Figure 13a**, for each of the four models whose target variable was "Fatal vs Non-Fatal", five model runs were completed. Within each model, the feature "Drugs Involved" was considered most important among all five runs. 
+
+Some of the models have more than one feature per a particular rank in the top three. These are ties based on the most common occurrence among the five model runs that were completed. 
+
+The LASSO model has the power to shrink some coefficients on predictors to zero. If this occurs for every predictor in the dataset, then no features will show up in the top three. This occurs in some of the bike/pedestrian data subsets in **Figure 13b** and **Figure 13c**.
+
 ```{r}
 results_heatmap_all <- results_heatmap %>%
   filter(`Data Subset` == "All")
@@ -665,6 +667,15 @@ Pedestrian-involved crash models continue to reflect patterns observed in the br
 While no dominant pattern emerges in the Injured vs. Non-Injured models, certain features such as Driveway or Alley presence and the Sum of Traffic Calming Devices appear with some regularity in the linear models. Additionally, for Fatal vs. Non-Fatal predictions, the Hit and Run indicator is frequently identified as a top feature, reflecting its potential link to crash severity in pedestrian incidents.
 
 In the infrastructure-only models, Bike Lane presence emerges as a leading predictor in Degree of Injury models using logistic regression, with broader infrastructure presence indicators following closely. In the Injured vs. Non-Injured models, the Sum of Traffic Calming Devices appears again as a contributing feature. For Fatal vs. Non-Fatal predictions, Speed Limit is the most significant predictor in logistic regression models and ranks second in Random Forest models. Total Watts also appears consistently across all three target outcomes, underscoring the potential role of visibility and lighting in pedestrian crash severity.
+
+## Model Performance
+Across all modeling configurations, predictive performance was generally modest, with no single combination of model type, outcome variable, and predictor set consistently outperforming the others. Nonetheless, certain configurations produced comparatively stronger results. Models predicting Fatal vs. Non-Fatal outcomes for pedestrian-only crashes using all predictors achieved some of the highest Kappa values, indicating improved capacity to account for the pronounced class imbalance in this subset. Similarly, models targeting Degree of Injury for bicycle-only crashes with all predictors tended to outperform other bicycle crash configurations.
+
+In the full crash dataset, the Injured vs. Non-Injured outcome with all predictors yielded the highest average Kappa values (approximately 0.10) across all four modeling approaches. Linear models, in particular, showed relatively stronger performance for Fatal vs. Non-Fatal predictions.
+
+Performance varied substantially across repeated runs, reinforcing the decision to aggregate results over five random seeds. For example, a logistic regression model predicting Fatal vs. Non-Fatal outcomes for bicycle–motor vehicle crashes with all predictors achieved a Kappa of 0.665 in its highest-performing run but dropped to 0.000 in its lowest, despite identical settings aside from the random seed. This variability highlights the instability of results in smaller or more imbalanced subsets and underscores the need for aggregation to obtain reliable estimates of feature importance.
+
+While overall predictive performance was limited, the primary objective of this analysis is not to maximize classification accuracy, but rather to identify consistent and interpretable predictors of crash severity. This emphasis on feature importance allows us to extract meaningful patterns from the models even when predictive performance is modest, providing a more robust basis for understanding the underlying risk factors.
 
 ## Summary of Results
 Taken together, the results across all crash types and modeling configurations reveal several consistent insights into the factors most associated with crash severity. Behavioral factors, particularly drug involvement, emerge as the most influential predictors of fatal outcomes across all road user types. This pattern is especially pronounced in regularized models, where alcohol involvement and crash speed consistently appear as a top predictor.
